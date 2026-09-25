@@ -1,0 +1,96 @@
+/* Shared building blocks for VISTIL custom sections.
+   Loaded (cached) by every section file prefixed "vistil-".
+   Relies on Dawn's existing color-scheme / spacing / typography tokens
+   so custom sections stay visually consistent with the rest of the theme. */
+
+.vistil-eyebrow {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin: 0 0 0.8rem;
+}
+
+.vistil-heading {
+  margin: 0 0 1.2rem;
+}
+
+.vistil-subheading {
+  max-width: 60rem;
+  margin: 0 auto 3rem;
+  opacity: 0.85;
+}
+
+.vistil-center {
+  text-align: center;
+}
+
+.vistil-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  background: rgba(var(--color-foreground), 0.06);
+}
+
+.vistil-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.vistil-icon svg,
+.vistil-icon .svg-wrapper svg {
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.vistil-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-button {
+    width: auto;
+  }
+}
+
+.vistil-button[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.vistil-strike {
+  text-decoration: line-through;
+  opacity: 0.6;
+  margin-right: 0.6rem;
+}
+
+.vistil-grid {
+  display: grid;
+  gap: 3rem 2.4rem;
+}
+
+.vistil-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,82 @@
+.vistil-offer {
+  display: block;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.vistil-offer__tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.vistil-offer__tier {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 1.6rem 2rem;
+  border-radius: var(--text-boxes-radius, 0.8rem);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.vistil-offer__tier.is-selected {
+  border-color: rgb(var(--color-foreground));
+  box-shadow: 0 0 0 0.1rem rgb(var(--color-foreground));
+}
+
+.vistil-offer__tier--highlighted {
+  border-color: rgba(var(--color-foreground), 0.4);
+}
+
+.vistil-offer__badge {
+  position: absolute;
+  top: -1rem;
+  right: 1.6rem;
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.03rem;
+  text-transform: uppercase;
+  padding: 0.3rem 1rem;
+  border-radius: 5rem;
+}
+
+.vistil-offer__tier-label {
+  font-weight: 600;
+  flex: 1;
+}
+
+.vistil-offer__tier-price {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.vistil-offer__tier-helper {
+  display: block;
+  width: 100%;
+  font-size: 1.2rem;
+  opacity: 0.7;
+  margin-top: 0.4rem;
+}
+
+.vistil-offer__submit {
+  font-size: 1.6rem;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+}
+
+.vistil-offer__reassurance {
+  margin: 1.2rem 0 0;
+  font-size: 1.2rem;
+  opacity: 0.75;
+}

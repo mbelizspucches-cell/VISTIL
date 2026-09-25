@@ -1,0 +1,74 @@
+.vistil-sticky-atc {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  transform: translateY(100%);
+  transition: transform var(--duration-medium, 300ms) ease;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.08);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.vistil-sticky-atc--visible {
+  transform: translateY(0);
+}
+
+.vistil-sticky-atc__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.vistil-sticky-atc__product {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+.vistil-sticky-atc__image img {
+  width: 4.4rem;
+  height: 4.4rem;
+  object-fit: cover;
+  border-radius: 0.4rem;
+  display: block;
+}
+
+.vistil-sticky-atc__info {
+  min-width: 0;
+}
+
+.vistil-sticky-atc__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 22rem;
+}
+
+.vistil-sticky-atc__price {
+  margin: 0.2rem 0 0;
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+.vistil-sticky-atc__submit {
+  flex-shrink: 0;
+  width: auto;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 990px) {
+  .vistil-sticky-atc__title {
+    max-width: 40rem;
+  }
+}

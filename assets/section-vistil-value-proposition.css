@@ -1,0 +1,27 @@
+.vistil-value-prop__grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-value-prop__grid {
+    grid-template-columns: repeat(var(--columns-desktop, 4), 1fr);
+  }
+}
+
+.vistil-value-prop__icon {
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+}
+
+.vistil-value-prop__item-heading {
+  margin: 0 0 0.6rem;
+}
+
+.vistil-value-prop__item-text {
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+.vistil-value-prop__item-text p {
+  margin: 0;
+}

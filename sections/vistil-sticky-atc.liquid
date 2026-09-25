@@ -1,0 +1,65 @@
+{% comment %}
+  Mobile-first sticky Add to Cart bar.
+  Only renders on the product template (needs `product`). It never owns
+  cart logic itself — it mirrors the real main-product form (title, image,
+  price, sold-out state) via the `variant-change` pub/sub event Dawn already
+  fires from product-info.js, and clicking its button just clicks the real
+  <product-form> submit button so Dawn's existing cart drawer/notification
+  flow is reused as-is.
+{% endcomment %}
+{%- if product -%}
+  {{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
+  {{ 'section-vistil-sticky-atc.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'vistil-sticky-atc.js' | asset_url }}" defer="defer"></script>
+
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  <vistil-sticky-atc
+    class="vistil-sticky-atc color-{{ section.settings.color_scheme }}"
+    data-sold-out-label="{{ section.settings.sold_out_label | escape }}"
+  >
+    <div class="page-width vistil-sticky-atc__inner">
+      <div class="vistil-sticky-atc__product">
+        <div class="vistil-sticky-atc__image">
+          {%- if current_variant.featured_image -%}
+            {{ current_variant.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: current_variant.featured_image.alt, class: 'vistil-sticky-atc__thumb', 'data-vistil-sticky-image': '' }}
+          {%- elsif product.featured_image -%}
+            {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: product.featured_image.alt, class: 'vistil-sticky-atc__thumb', 'data-vistil-sticky-image': '' }}
+          {%- endif -%}
+        </div>
+        <div class="vistil-sticky-atc__info">
+          <p class="vistil-sticky-atc__title">{{ product.title | escape }}</p>
+          <p class="vistil-sticky-atc__price" data-vistil-sticky-price>{{ current_variant.price | money }}</p>
+        </div>
+      </div>
+      <button type="button" class="button button--primary vistil-button vistil-sticky-atc__submit" data-vistil-sticky-submit>
+        <span data-vistil-sticky-cta-label>{{ section.settings.cta_label | default: 'Add to cart' | escape }}</span>
+      </button>
+    </div>
+  </vistil-sticky-atc>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "VISTIL: Sticky add to cart",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Add to cart" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "VISTIL: Sticky add to cart"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

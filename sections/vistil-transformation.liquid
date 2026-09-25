@@ -1,0 +1,134 @@
+{% comment %}
+  Before / after image compare slider for product demonstration.
+  No JS, no drag-cost: without JavaScript it degrades to a static
+  side-by-side pair (progressive enhancement).
+{% endcomment %}
+{{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-vistil-transformation.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vistil-transformation.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="vistil-heading vistil-center {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="vistil-subheading vistil-center">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <vistil-transformation class="vistil-transformation">
+      <div class="vistil-transformation__frame">
+        <div class="vistil-transformation__image vistil-transformation__image--after">
+          {%- if section.settings.after_image != blank -%}
+            {{ section.settings.after_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.after_label }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <span class="vistil-transformation__tag vistil-transformation__tag--after">{{ section.settings.after_label | escape }}</span>
+        </div>
+        <div class="vistil-transformation__image vistil-transformation__image--before" data-vistil-before-panel>
+          {%- if section.settings.before_image != blank -%}
+            {{ section.settings.before_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.before_label }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <span class="vistil-transformation__tag vistil-transformation__tag--before">{{ section.settings.before_label | escape }}</span>
+        </div>
+        <input
+          type="range"
+          class="vistil-transformation__slider"
+          min="0"
+          max="100"
+          value="50"
+          aria-label="Drag to compare before and after"
+          data-vistil-slider
+        >
+      </div>
+    </vistil-transformation>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "VISTIL: Transformation",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "See the difference" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    {
+      "type": "header",
+      "content": "Before"
+    },
+    { "type": "image_picker", "id": "before_image", "label": "Before image" },
+    { "type": "text", "id": "before_label", "label": "Before label", "default": "Before" },
+    {
+      "type": "header",
+      "content": "After"
+    },
+    { "type": "image_picker", "id": "after_image", "label": "After image" },
+    { "type": "text", "id": "after_label", "label": "After label", "default": "After" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "VISTIL: Transformation"
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

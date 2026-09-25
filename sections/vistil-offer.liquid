@@ -1,0 +1,162 @@
+{% comment %}
+  Quantity-tier offer / pricing box.
+  Tiers only set the quantity on the real product form (templates/product.json
+  "main" section) and trigger its existing submit button — Dawn's own
+  <product-form> element still owns cart/variant logic, so tier prices are
+  entered by the merchant rather than computed, avoiding money-format drift
+  across currencies/locales.
+{% endcomment %}
+{{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-vistil-offer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vistil-offer.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="vistil-heading vistil-center {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <p class="vistil-subheading vistil-center">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    <vistil-offer class="vistil-offer" role="radiogroup" aria-label="{{ section.settings.heading | default: 'Choose your offer' | escape }}">
+      <div class="vistil-offer__tiers">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'tier' -%}
+            <button
+              type="button"
+              class="vistil-offer__tier{% if block.settings.highlighted %} vistil-offer__tier--highlighted{% endif %}{% if forloop.first %} is-selected{% endif %}"
+              data-vistil-tier
+              data-quantity="{{ block.settings.quantity }}"
+              role="radio"
+              aria-checked="{% if forloop.first %}true{% else %}false{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.badge_text != blank -%}
+                <span class="vistil-offer__badge">{{ block.settings.badge_text | escape }}</span>
+              {%- endif -%}
+              <span class="vistil-offer__tier-label">{{ block.settings.label | escape }}</span>
+              <span class="vistil-offer__tier-price">
+                {%- if block.settings.compare_at_price != blank -%}
+                  <span class="vistil-strike">{{ block.settings.compare_at_price | escape }}</span>
+                {%- endif -%}
+                <span class="vistil-offer__price-value">{{ block.settings.price | escape }}</span>
+              </span>
+              {%- if block.settings.helper_text != blank -%}
+                <span class="vistil-offer__tier-helper">{{ block.settings.helper_text | escape }}</span>
+              {%- endif -%}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <button type="button" class="button button--primary vistil-button vistil-offer__submit" data-vistil-offer-submit>
+        {{ section.settings.cta_label | default: 'Add to cart' | escape }}
+      </button>
+
+      {%- if section.settings.reassurance_text != blank -%}
+        <p class="vistil-offer__reassurance vistil-center">{{ section.settings.reassurance_text | escape }}</p>
+      {%- endif -%}
+    </vistil-offer>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "VISTIL: Offer / pricing",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your bundle"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "cta_label", "label": "Add to cart button label", "default": "Add to cart" },
+    { "type": "text", "id": "reassurance_text", "label": "Reassurance text below button", "default": "Free shipping · 30-day guarantee" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Quantity tier",
+      "settings": [
+        { "type": "number", "id": "quantity", "label": "Quantity to add to cart", "default": 1 },
+        { "type": "text", "id": "label", "label": "Label", "default": "1x — Single" },
+        { "type": "text", "id": "price", "label": "Price (text)", "default": "$29" },
+        { "type": "text", "id": "compare_at_price", "label": "Compare-at price (text, optional)" },
+        { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "" },
+        { "type": "text", "id": "helper_text", "label": "Helper text (optional)", "default": "" },
+        { "type": "checkbox", "id": "highlighted", "label": "Highlight as best value", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VISTIL: Offer / pricing",
+      "blocks": [
+        { "type": "tier", "settings": { "quantity": 1, "label": "1x — Single", "price": "$29" } },
+        { "type": "tier", "settings": { "quantity": 2, "label": "2x — Duo", "price": "$49", "badge_text": "Save 15%", "highlighted": true } },
+        { "type": "tier", "settings": { "quantity": 3, "label": "3x — Best value", "price": "$69", "badge_text": "Save 25%" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

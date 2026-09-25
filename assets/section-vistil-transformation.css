@@ -1,0 +1,107 @@
+.vistil-transformation {
+  display: block;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.vistil-transformation__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--media-radius, 0);
+  user-select: none;
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-transformation__frame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.vistil-transformation__image {
+  position: absolute;
+  inset: 0;
+}
+
+.vistil-transformation__image img,
+.vistil-transformation__image svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vistil-transformation__image--after {
+  z-index: 1;
+}
+
+.vistil-transformation__image--before {
+  z-index: 2;
+  clip-path: inset(0 50% 0 0);
+}
+
+.vistil-transformation__tag {
+  position: absolute;
+  bottom: 1.6rem;
+  z-index: 3;
+  padding: 0.5rem 1.2rem;
+  border-radius: 5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03rem;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+}
+
+.vistil-transformation__tag--before {
+  left: 1.6rem;
+}
+
+.vistil-transformation__tag--after {
+  right: 1.6rem;
+}
+
+.vistil-transformation__slider {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.vistil-transformation__slider::-webkit-slider-runnable-track {
+  background: transparent;
+  height: 100%;
+}
+
+.vistil-transformation__slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
+  cursor: ew-resize;
+}
+
+.vistil-transformation__slider::-moz-range-track {
+  background: transparent;
+  height: 100%;
+}
+
+.vistil-transformation__slider::-moz-range-thumb {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 0.2rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.3);
+  cursor: ew-resize;
+}

@@ -1,0 +1,148 @@
+{{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-vistil-trust-guarantee.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width section-{{ section.id }}-padding">
+    {%- assign badge_blocks = section.blocks | where: 'type', 'badge' -%}
+
+    {%- if badge_blocks.size > 0 -%}
+      <ul class="vistil-trust__badges list-unstyled" role="list">
+        {%- for block in badge_blocks -%}
+          <li class="vistil-trust__badge" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != 'none' -%}
+              <div class="vistil-icon">{%- render 'icon-accordion', icon: block.settings.icon -%}</div>
+            {%- endif -%}
+            <span>{{ block.settings.text | escape }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.guarantee_heading != blank or section.settings.guarantee_text != blank -%}
+      <div class="vistil-trust__guarantee">
+        {%- if section.settings.guarantee_icon != 'none' -%}
+          <div class="vistil-icon vistil-trust__guarantee-icon">
+            {%- render 'icon-accordion', icon: section.settings.guarantee_icon -%}
+          </div>
+        {%- endif -%}
+        <div>
+          {%- if section.settings.guarantee_heading != blank -%}
+            <h3 class="h4">{{ section.settings.guarantee_heading | escape }}</h3>
+          {%- endif -%}
+          {%- if section.settings.guarantee_text != blank -%}
+            <div class="rte">{{ section.settings.guarantee_text }}</div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "VISTIL: Trust & guarantee",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "Guarantee callout"
+    },
+    {
+      "type": "select",
+      "id": "guarantee_icon",
+      "label": "Icon",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "padlock", "label": "Padlock" },
+        { "value": "checkmark", "label": "Checkmark" },
+        { "value": "return", "label": "Return" },
+        { "value": "heart", "label": "Heart" }
+      ],
+      "default": "checkmark"
+    },
+    { "type": "text", "id": "guarantee_heading", "label": "Guarantee heading", "default": "30-day money-back guarantee" },
+    { "type": "richtext", "id": "guarantee_text", "label": "Guarantee text", "default": "<p>Not happy? Get a full refund, no questions asked.</p>" },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 44
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Trust badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "padlock", "label": "Padlock" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "return", "label": "Return" },
+            { "value": "checkmark", "label": "Checkmark" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "lock"
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Secure checkout" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "VISTIL: Trust & guarantee",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "lock", "text": "Secure checkout" } },
+        { "type": "badge", "settings": { "icon": "truck", "text": "Fast shipping" } },
+        { "type": "badge", "settings": { "icon": "return", "text": "Easy returns" } }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

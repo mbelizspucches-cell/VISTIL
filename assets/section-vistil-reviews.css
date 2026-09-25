@@ -1,0 +1,64 @@
+.vistil-reviews__summary {
+  margin-bottom: 3.2rem;
+}
+
+.vistil-reviews__stars,
+.vistil-reviews__card-stars {
+  display: inline-flex;
+  gap: 0.2rem;
+  color: #e8b923;
+}
+
+.vistil-reviews__stars svg,
+.vistil-reviews__card-stars svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: currentColor;
+}
+
+.vistil-reviews__grid {
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+}
+
+.vistil-reviews__card {
+  padding: 2.4rem;
+  border-radius: var(--text-boxes-radius, 0.8rem);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.vistil-reviews__card-text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.vistil-reviews__card-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  font-size: 1.3rem;
+}
+
+.vistil-reviews__card-author img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.vistil-reviews__verified {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.1rem;
+  opacity: 0.65;
+}
+
+.vistil-reviews__verified svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}

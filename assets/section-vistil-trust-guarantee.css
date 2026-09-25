@@ -1,0 +1,51 @@
+.vistil-trust__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.4rem 3.2rem;
+  padding: 0;
+  margin: 0 0 3.6rem;
+}
+
+.vistil-trust__badge {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.vistil-trust__guarantee {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 2.4rem;
+  border-radius: var(--text-boxes-radius, 0.8rem);
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  text-align: left;
+}
+
+.vistil-trust__guarantee-icon svg {
+  width: 4rem;
+  height: 4rem;
+}
+
+.vistil-trust__guarantee h3 {
+  margin: 0 0 0.4rem;
+}
+
+.vistil-trust__guarantee .rte {
+  margin: 0;
+  font-size: 1.4rem;
+  opacity: 0.85;
+}
+
+@media screen and (max-width: 749px) {
+  .vistil-trust__guarantee {
+    flex-direction: column;
+    text-align: center;
+  }
+}
