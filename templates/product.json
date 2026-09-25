@@ -72,66 +72,66 @@
     "social-proof": {
       "type": "vistil-social-proof",
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "number": "10,000+", "label": "Happy customers" } },
-        "stat-2": { "type": "stat", "settings": { "number": "4.9/5", "label": "Average rating" } },
-        "stat-3": { "type": "stat", "settings": { "number": "30-day", "label": "Money-back guarantee" } }
+        "stat-1": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. verified reviews]" } },
+        "stat-2": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. average rating]" } },
+        "stat-3": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. shipping time]" } }
       },
       "block_order": ["stat-1", "stat-2", "stat-3"],
       "settings": {
-        "heading": "Trusted by thousands of customers",
+        "heading": "[PLACEHOLDER: overline trust statement — real claims only]",
         "color_scheme": "scheme-2",
         "padding_top": 40,
         "padding_bottom": 40
       }
     },
-    "value-proposition": {
-      "type": "vistil-value-proposition",
+    "characteristics": {
+      "type": "rich-text",
       "blocks": {
-        "value-1": { "type": "value", "settings": { "icon": "truck", "heading": "Free shipping", "text": "<p>On every order, every time.</p>" } },
-        "value-2": { "type": "value", "settings": { "icon": "lock", "heading": "Secure checkout", "text": "<p>Your data is always protected.</p>" } },
-        "value-3": { "type": "value", "settings": { "icon": "return", "heading": "Easy returns", "text": "<p>30 days to change your mind.</p>" } },
-        "value-4": { "type": "value", "settings": { "icon": "heart", "heading": "Loved by customers", "text": "<p>Thousands of 5-star reviews.</p>" } }
-      },
-      "block_order": ["value-1", "value-2", "value-3", "value-4"],
-      "settings": {
-        "heading": "Why VISTIL",
-        "heading_size": "h1",
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
-      }
-    },
-    "benefits": {
-      "type": "vistil-benefits",
-      "blocks": {
-        "benefit-1": {
-          "type": "benefit",
+        "caption": {
+          "type": "caption",
           "settings": {
-            "eyebrow": "Benefit 01",
-            "heading": "Benefit heading",
-            "text": "<p>Explain the benefit and why it matters to the customer.</p>",
-            "bullet_1": "Key point one",
-            "bullet_2": "Key point two",
-            "bullet_3": "Key point three"
+            "caption": "[PLACEHOLDER: category / eyebrow]",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
           }
         },
-        "benefit-2": {
-          "type": "benefit",
+        "heading": {
+          "type": "heading",
           "settings": {
-            "eyebrow": "Benefit 02",
-            "heading": "Another benefit",
-            "text": "<p>Explain the second benefit and its impact.</p>",
-            "bullet_1": "Key point one",
-            "bullet_2": "Key point two",
-            "bullet_3": "Key point three"
+            "heading": "[PLACEHOLDER: what this product is]",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>[PLACEHOLDER: a short, clear explanation of what the product is and what it does — no medical or performance claims that aren't verified]</p>"
           }
         }
       },
-      "block_order": ["benefit-1", "benefit-2"],
+      "block_order": ["caption", "heading", "text"],
       "settings": {
-        "heading": "Built for real results",
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 28
+      }
+    },
+    "value-proposition": {
+      "type": "vistil-value-proposition",
+      "blocks": {
+        "value-1": { "type": "value", "settings": { "icon": "truck", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
+        "value-2": { "type": "value", "settings": { "icon": "lock", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
+        "value-3": { "type": "value", "settings": { "icon": "return", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
+        "value-4": { "type": "value", "settings": { "icon": "heart", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } }
+      },
+      "block_order": ["value-1", "value-2", "value-3", "value-4"],
+      "settings": {
+        "heading": "[PLACEHOLDER: quick benefits heading]",
         "heading_size": "h1",
+        "columns_desktop": 4,
         "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
@@ -140,26 +140,15 @@
     "offer": {
       "type": "vistil-offer",
       "blocks": {
-        "tier-1": { "type": "tier", "settings": { "quantity": 1, "label": "1x — Single", "price": "$29" } },
-        "tier-2": { "type": "tier", "settings": { "quantity": 2, "label": "2x — Duo", "price": "$49", "badge_text": "Save 15%", "highlighted": true } },
-        "tier-3": { "type": "tier", "settings": { "quantity": 3, "label": "3x — Best value", "price": "$69", "badge_text": "Save 25%" } }
+        "tier-1": { "type": "tier", "settings": { "quantity": 1, "label": "1x" } },
+        "tier-2": { "type": "tier", "settings": { "quantity": 2, "label": "2x", "highlighted": true } },
+        "tier-3": { "type": "tier", "settings": { "quantity": 3, "label": "3x" } }
       },
       "block_order": ["tier-1", "tier-2", "tier-3"],
       "settings": {
-        "heading": "Choose your bundle",
+        "heading": "[PLACEHOLDER: offer heading]",
         "cta_label": "Add to cart",
-        "reassurance_text": "Free shipping · 30-day guarantee",
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
-      }
-    },
-    "transformation": {
-      "type": "vistil-transformation",
-      "settings": {
-        "heading": "See the difference",
-        "before_label": "Before",
-        "after_label": "After",
+        "reassurance_text": "[PLACEHOLDER: real reassurance / micro-proof text]",
         "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
@@ -171,26 +160,61 @@
         "row-1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How long does shipping take?",
-            "row_content": "<p>Orders ship within 1-2 business days and arrive in 3-7 business days.</p>"
+            "heading": "How do I use it?",
+            "row_content": "<p>[PLACEHOLDER: real usage instructions]</p>"
           }
         },
         "row-2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What if it doesn't work for me?",
-            "row_content": "<p>You're covered by our 30-day money-back guarantee — no questions asked.</p>"
+            "heading": "How long does shipping take?",
+            "row_content": "<p>[PLACEHOLDER: real shipping times]</p>"
           }
         },
         "row-3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Is this safe to use?",
-            "row_content": "<p>Yes. Add manufacturing, certification, or safety details here.</p>"
+            "heading": "What's included?",
+            "row_content": "<p>[PLACEHOLDER: real contents of the package]</p>"
+          }
+        },
+        "row-4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What is it made of?",
+            "row_content": "<p>[PLACEHOLDER: real materials]</p>"
+          }
+        },
+        "row-5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What size is it?",
+            "row_content": "<p>[PLACEHOLDER: real dimensions/measurements]</p>"
+          }
+        },
+        "row-6": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's your guarantee?",
+            "row_content": "<p>[PLACEHOLDER: real guarantee policy]</p>"
+          }
+        },
+        "row-7": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What if I need to return it?",
+            "row_content": "<p>[PLACEHOLDER: real returns policy]</p>"
+          }
+        },
+        "row-8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Other questions?",
+            "row_content": "<p>[PLACEHOLDER: link to a full FAQ page or contact info]</p>"
           }
         }
       },
-      "block_order": ["row-1", "row-2", "row-3"],
+      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5", "row-6", "row-7", "row-8"],
       "settings": {
         "heading": "Common questions",
         "heading_size": "h1",
@@ -202,18 +226,29 @@
         "padding_bottom": 52
       }
     },
+    "transformation": {
+      "type": "vistil-transformation",
+      "settings": {
+        "heading": "[PLACEHOLDER: demonstration heading]",
+        "before_label": "Before",
+        "after_label": "After",
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
     "trust-guarantee": {
       "type": "vistil-trust-guarantee",
       "blocks": {
         "badge-1": { "type": "badge", "settings": { "icon": "lock", "text": "Secure checkout" } },
-        "badge-2": { "type": "badge", "settings": { "icon": "truck", "text": "Fast shipping" } },
-        "badge-3": { "type": "badge", "settings": { "icon": "return", "text": "Easy returns" } }
+        "badge-2": { "type": "badge", "settings": { "icon": "truck", "text": "[PLACEHOLDER: real shipping promise]" } },
+        "badge-3": { "type": "badge", "settings": { "icon": "return", "text": "[PLACEHOLDER: real returns promise]" } }
       },
       "block_order": ["badge-1", "badge-2", "badge-3"],
       "settings": {
         "guarantee_icon": "checkmark",
-        "guarantee_heading": "30-day money-back guarantee",
-        "guarantee_text": "<p>Not happy? Get a full refund, no questions asked.</p>",
+        "guarantee_heading": "[PLACEHOLDER: your real guarantee policy]",
+        "guarantee_text": "<p>[PLACEHOLDER: describe your real return/refund policy]</p>",
         "color_scheme": "scheme-2",
         "padding_top": 44,
         "padding_bottom": 44
@@ -224,22 +259,14 @@
       "blocks": {
         "review-1": {
           "type": "review",
-          "settings": { "rating": 5, "text": "This product completely changed my routine. Worth every penny.", "author": "Happy customer", "verified": true }
-        },
-        "review-2": {
-          "type": "review",
-          "settings": { "rating": 5, "text": "Exactly as described, fast shipping, will buy again.", "author": "Verified buyer", "verified": true }
-        },
-        "review-3": {
-          "type": "review",
-          "settings": { "rating": 4, "text": "Great quality for the price.", "author": "Verified buyer", "verified": true }
+          "settings": { "rating": 5, "text": "[PLACEHOLDER: paste a real customer review]", "author": "[PLACEHOLDER: customer name]", "verified": false }
         }
       },
-      "block_order": ["review-1", "review-2", "review-3"],
+      "block_order": ["review-1"],
       "settings": {
         "heading": "What customers are saying",
-        "average_rating": "4.9",
-        "review_count": "1,240",
+        "average_rating": "",
+        "review_count": "",
         "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
@@ -282,11 +309,11 @@
   "order": [
     "main",
     "social-proof",
+    "characteristics",
     "value-proposition",
-    "benefits",
     "offer",
-    "transformation",
     "objections",
+    "transformation",
     "trust-guarantee",
     "reviews",
     "disclosures",

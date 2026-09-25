@@ -26,24 +26,45 @@ setting, `padding_top`/`padding_bottom` range settings, and (where relevant)
 
 ### The product page (`templates/product.json`)
 
-| Spec item | Implementation |
-| --- | --- |
-| Announcement bar | Dawn stock `sections/announcement-bar.liquid` (in `sections/header-group.json`) |
-| Clean header | Dawn stock `sections/header.liquid` |
-| Product hero | Dawn stock `sections/main-product.liquid` — gallery + title/price/variant picker/buy buttons, configured via the `main` blocks |
-| Social proof strip | `sections/vistil-social-proof.liquid` — stat counters and/or press logos |
-| Value proposition | `sections/vistil-value-proposition.liquid` — icon + heading + text grid |
-| Benefits | `sections/vistil-benefits.liquid` — alternating image/text rows with bullet points |
-| Product offer / pricing | `sections/vistil-offer.liquid` — quantity-tier bundle picker |
-| Main Add to Cart CTA | Dawn's `buy_buttons` block inside the Product hero |
-| Objection-handling accordions | Dawn stock `sections/collapsible-content.liquid`, preset as an FAQ |
-| Product demonstration / transformation | `sections/vistil-transformation.liquid` — draggable before/after image slider |
-| Trust and guarantee | `sections/vistil-trust-guarantee.liquid` |
-| Reviews | `sections/vistil-reviews.liquid` — manually curated, no review-app dependency |
-| Sticky Add to Cart | `sections/vistil-sticky-atc.liquid` — mobile-first fixed bar |
+The section order follows a conversion-funnel anatomy — capture → convince →
+close — not just an arbitrary stack of blocks. Every section answers a
+specific customer question or removes a specific objection:
 
-All of the above are reusable: add any `vistil-*` section to any other JSON
+| # | Section (in page order) | Funnel phase | Implementation |
+| --- | --- | --- | --- |
+| 1 | Announcement bar | Capture | Dawn stock `sections/announcement-bar.liquid` (`sections/header-group.json`) |
+| 2 | Header | Capture | Dawn stock `sections/header.liquid` |
+| 3 | Product hero | Capture | Dawn stock `sections/main-product.liquid` — gallery/video, title, price, variant picker, quick benefits (`icon_with_text` block available), buy buttons |
+| 4 | Social proof (initial) | Capture | `sections/vistil-social-proof.liquid` — stats and/or press logos |
+| 5 | What it is / what it does | Capture | Dawn stock `sections/rich-text.liquid`, presets as `characteristics` |
+| 6 | Quick scannable benefits | Convince | `sections/vistil-value-proposition.liquid` — icon + heading + text grid |
+| 7–9 | Offer/pricing + main CTA + micro-proof | Convince | `sections/vistil-offer.liquid` — quantity tiers, its own Add to Cart button, and a reassurance line right under it |
+| 10 | Objection-handling accordion | Convince | Dawn stock `sections/collapsible-content.liquid`, presets an 8-row FAQ (usage, shipping, contents, materials, size, guarantee, returns, other) |
+| 11 | Demonstration / transformation | Convince | `sections/vistil-transformation.liquid` — draggable before/after image slider |
+| 12 | Trust + guarantee | Close | `sections/vistil-trust-guarantee.liquid` |
+| 13 | Final reviews | Close | `sections/vistil-reviews.liquid` — manually curated, no review-app dependency |
+| — | Shipping/returns disclosures, related products | (Dawn utility, not part of the funnel) | Dawn stock `disclosures` / `related-products`, kept as-is |
+| 14 | Sticky Add to Cart | Close (always present) | `sections/vistil-sticky-atc.liquid` — mobile-first fixed bar |
+
+`sections/vistil-benefits.liquid` (alternating image/text rows) was built as
+part of the original component library and is still available to drag into
+any template from the Theme Editor, but it isn't part of the default
+product-page flow above, since it isn't one of the funnel's required steps.
+
+All `vistil-*` sections are reusable: add any of them to any other JSON
 template from the Theme Editor and it will just work.
+
+### No fabricated content
+
+Per the brief, nothing in this repo invents reviews, ratings, sale counts,
+discounts, guarantee terms, or medical/certification claims. Every setting
+that would otherwise show a concrete number or claim ships with either a
+real, generic, always-true statement (e.g. "Secure checkout") or a
+`[PLACEHOLDER: ...]` value and an editor `info` hint — both in the
+`templates/product.json` preset content and in each section's own schema
+defaults (so a merchant dragging in a fresh block never sees fake data
+either). Search the repo for `PLACEHOLDER` before launch and replace every
+instance with real copy, or delete the block/section if it doesn't apply.
 
 ### How the custom sections talk to Dawn's cart logic
 

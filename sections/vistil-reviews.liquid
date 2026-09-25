@@ -95,8 +95,8 @@
       "default": "h1",
       "label": "Heading size"
     },
-    { "type": "text", "id": "average_rating", "label": "Average rating (e.g. 4.9)", "default": "4.9" },
-    { "type": "text", "id": "review_count", "label": "Review count (e.g. 1,240)", "default": "1,240" },
+    { "type": "text", "id": "average_rating", "label": "Average rating", "info": "Only enter your real, current average rating. Leave blank to hide.", "default": "" },
+    { "type": "text", "id": "review_count", "label": "Review count", "info": "Only enter your real review count. Leave blank to hide.", "default": "" },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -134,9 +134,9 @@
       "name": "Review",
       "settings": [
         { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "textarea", "id": "text", "label": "Review text", "default": "This product completely changed my routine. Worth every penny." },
-        { "type": "text", "id": "author", "label": "Author name", "default": "Happy customer" },
-        { "type": "checkbox", "id": "verified", "label": "Show verified buyer badge", "default": true },
+        { "type": "textarea", "id": "text", "label": "Review text", "info": "Paste a real customer review only — never fabricated.", "default": "[PLACEHOLDER: paste a real customer review]" },
+        { "type": "text", "id": "author", "label": "Author name", "info": "Use the real customer's name (or their initials/first name for privacy).", "default": "[PLACEHOLDER: customer name]" },
+        { "type": "checkbox", "id": "verified", "label": "Show verified buyer badge", "info": "Only enable if this is a genuine verified purchase.", "default": false },
         { "type": "image_picker", "id": "avatar", "label": "Avatar (optional)" }
       ]
     }

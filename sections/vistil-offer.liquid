@@ -98,7 +98,7 @@
     },
     { "type": "richtext", "id": "subheading", "label": "Subheading" },
     { "type": "text", "id": "cta_label", "label": "Add to cart button label", "default": "Add to cart" },
-    { "type": "text", "id": "reassurance_text", "label": "Reassurance text below button", "default": "Free shipping · 30-day guarantee" },
+    { "type": "text", "id": "reassurance_text", "label": "Reassurance / micro-proof text below button", "info": "Real, verifiable claims only (e.g. actual shipping time or return policy).", "default": "[PLACEHOLDER: reassurance text]" },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -137,9 +137,9 @@
       "settings": [
         { "type": "number", "id": "quantity", "label": "Quantity to add to cart", "default": 1 },
         { "type": "text", "id": "label", "label": "Label", "default": "1x — Single" },
-        { "type": "text", "id": "price", "label": "Price (text)", "default": "$29" },
-        { "type": "text", "id": "compare_at_price", "label": "Compare-at price (text, optional)" },
-        { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "default": "" },
+        { "type": "text", "id": "price", "label": "Price (text)", "info": "Enter the real price for this quantity. Never a fabricated number.", "default": "[PLACEHOLDER: price]" },
+        { "type": "text", "id": "compare_at_price", "label": "Compare-at price (text, optional)", "info": "Only fill in if this reflects a genuine previous/compare-at price." },
+        { "type": "text", "id": "badge_text", "label": "Badge text (optional)", "info": "Only claim a discount here if it is real.", "default": "" },
         { "type": "text", "id": "helper_text", "label": "Helper text (optional)", "default": "" },
         { "type": "checkbox", "id": "highlighted", "label": "Highlight as best value", "default": false }
       ]
@@ -149,9 +149,9 @@
     {
       "name": "VISTIL: Offer / pricing",
       "blocks": [
-        { "type": "tier", "settings": { "quantity": 1, "label": "1x — Single", "price": "$29" } },
-        { "type": "tier", "settings": { "quantity": 2, "label": "2x — Duo", "price": "$49", "badge_text": "Save 15%", "highlighted": true } },
-        { "type": "tier", "settings": { "quantity": 3, "label": "3x — Best value", "price": "$69", "badge_text": "Save 25%" } }
+        { "type": "tier", "settings": { "quantity": 1, "label": "1x — Single" } },
+        { "type": "tier", "settings": { "quantity": 2, "label": "2x — Duo", "highlighted": true } },
+        { "type": "tier", "settings": { "quantity": 3, "label": "3x — Best value" } }
       ]
     }
   ],
