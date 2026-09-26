@@ -54,11 +54,15 @@
 .vistil-offer__tier-label {
   font-weight: 600;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .vistil-offer__tier-price {
   font-weight: 700;
-  white-space: nowrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .vistil-offer__tier-helper {

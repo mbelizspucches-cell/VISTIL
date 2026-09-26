@@ -7,11 +7,17 @@
   max-width: 76rem;
 }
 
+.vistil-social-proof__stat {
+  min-width: 0;
+}
+
 .vistil-social-proof__stat-number {
   font-size: 3.2rem;
   font-weight: 700;
   line-height: 1.1;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 @media screen and (min-width: 750px) {
