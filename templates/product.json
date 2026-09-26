@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -11,10 +20,12 @@
           }
         },
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -24,7 +35,8 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -34,7 +46,8 @@
           }
         },
         "description": {
-          "type": "description"
+          "type": "description",
+          "settings": {}
         },
         "share": {
           "type": "share",
@@ -56,13 +69,13 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "stacked",
         "media_size": "large",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "image_zoom": "lightbox",
+        "gallery_layout": "stacked",
         "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -72,11 +85,33 @@
     "social-proof": {
       "type": "vistil-social-proof",
       "blocks": {
-        "stat-1": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. verified reviews]" } },
-        "stat-2": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. average rating]" } },
-        "stat-3": { "type": "stat", "settings": { "number": "[PLACEHOLDER]", "label": "[PLACEHOLDER: e.g. shipping time]" } }
+        "stat-1": {
+          "type": "stat",
+          "settings": {
+            "number": "[PLACEHOLDER]",
+            "label": "[PLACEHOLDER: e.g. verified reviews]"
+          }
+        },
+        "stat-2": {
+          "type": "stat",
+          "settings": {
+            "number": "[PLACEHOLDER]",
+            "label": "[PLACEHOLDER: e.g. average rating]"
+          }
+        },
+        "stat-3": {
+          "type": "stat",
+          "settings": {
+            "number": "[PLACEHOLDER]",
+            "label": "[PLACEHOLDER: e.g. shipping time]"
+          }
+        }
       },
-      "block_order": ["stat-1", "stat-2", "stat-3"],
+      "block_order": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ],
       "settings": {
         "heading": "[PLACEHOLDER: overline trust statement — real claims only]",
         "color_scheme": "scheme-2",
@@ -109,7 +144,11 @@
           }
         }
       },
-      "block_order": ["caption", "heading", "text"],
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
@@ -122,12 +161,45 @@
     "value-proposition": {
       "type": "vistil-value-proposition",
       "blocks": {
-        "value-1": { "type": "value", "settings": { "icon": "truck", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
-        "value-2": { "type": "value", "settings": { "icon": "lock", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
-        "value-3": { "type": "value", "settings": { "icon": "return", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } },
-        "value-4": { "type": "value", "settings": { "icon": "heart", "heading": "[PLACEHOLDER: benefit]", "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>" } }
+        "value-1": {
+          "type": "value",
+          "settings": {
+            "icon": "truck",
+            "heading": "[PLACEHOLDER: benefit]",
+            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+          }
+        },
+        "value-2": {
+          "type": "value",
+          "settings": {
+            "icon": "lock",
+            "heading": "[PLACEHOLDER: benefit]",
+            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+          }
+        },
+        "value-3": {
+          "type": "value",
+          "settings": {
+            "icon": "return",
+            "heading": "[PLACEHOLDER: benefit]",
+            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+          }
+        },
+        "value-4": {
+          "type": "value",
+          "settings": {
+            "icon": "heart",
+            "heading": "[PLACEHOLDER: benefit]",
+            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+          }
+        }
       },
-      "block_order": ["value-1", "value-2", "value-3", "value-4"],
+      "block_order": [
+        "value-1",
+        "value-2",
+        "value-3",
+        "value-4"
+      ],
       "settings": {
         "heading": "[PLACEHOLDER: quick benefits heading]",
         "heading_size": "h1",
@@ -140,11 +212,34 @@
     "offer": {
       "type": "vistil-offer",
       "blocks": {
-        "tier-1": { "type": "tier", "settings": { "quantity": 1, "label": "1x" } },
-        "tier-2": { "type": "tier", "settings": { "quantity": 2, "label": "2x", "highlighted": true } },
-        "tier-3": { "type": "tier", "settings": { "quantity": 3, "label": "3x" } }
+        "tier-1": {
+          "type": "tier",
+          "settings": {
+            "quantity": 1,
+            "label": "1x"
+          }
+        },
+        "tier-2": {
+          "type": "tier",
+          "settings": {
+            "quantity": 2,
+            "label": "2x",
+            "highlighted": true
+          }
+        },
+        "tier-3": {
+          "type": "tier",
+          "settings": {
+            "quantity": 3,
+            "label": "3x"
+          }
+        }
       },
-      "block_order": ["tier-1", "tier-2", "tier-3"],
+      "block_order": [
+        "tier-1",
+        "tier-2",
+        "tier-3"
+      ],
       "settings": {
         "heading": "[PLACEHOLDER: offer heading]",
         "cta_label": "Add to cart",
@@ -214,7 +309,16 @@
           }
         }
       },
-      "block_order": ["row-1", "row-2", "row-3", "row-4", "row-5", "row-6", "row-7", "row-8"],
+      "block_order": [
+        "row-1",
+        "row-2",
+        "row-3",
+        "row-4",
+        "row-5",
+        "row-6",
+        "row-7",
+        "row-8"
+      ],
       "settings": {
         "heading": "Common questions",
         "heading_size": "h1",
@@ -240,16 +344,38 @@
     "trust-guarantee": {
       "type": "vistil-trust-guarantee",
       "blocks": {
-        "badge-1": { "type": "badge", "settings": { "icon": "lock", "text": "Secure checkout" } },
-        "badge-2": { "type": "badge", "settings": { "icon": "truck", "text": "[PLACEHOLDER: real shipping promise]" } },
-        "badge-3": { "type": "badge", "settings": { "icon": "return", "text": "[PLACEHOLDER: real returns promise]" } }
+        "badge-1": {
+          "type": "badge",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure checkout"
+          }
+        },
+        "badge-2": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "[PLACEHOLDER: real shipping promise]"
+          }
+        },
+        "badge-3": {
+          "type": "badge",
+          "settings": {
+            "icon": "return",
+            "text": "[PLACEHOLDER: real returns promise]"
+          }
+        }
       },
-      "block_order": ["badge-1", "badge-2", "badge-3"],
+      "block_order": [
+        "badge-1",
+        "badge-2",
+        "badge-3"
+      ],
       "settings": {
+        "color_scheme": "scheme-2",
         "guarantee_icon": "checkmark",
         "guarantee_heading": "[PLACEHOLDER: your real guarantee policy]",
         "guarantee_text": "<p>[PLACEHOLDER: describe your real return/refund policy]</p>",
-        "color_scheme": "scheme-2",
         "padding_top": 44,
         "padding_bottom": 44
       }
@@ -259,14 +385,19 @@
       "blocks": {
         "review-1": {
           "type": "review",
-          "settings": { "rating": 5, "text": "[PLACEHOLDER: paste a real customer review]", "author": "[PLACEHOLDER: customer name]", "verified": false }
+          "settings": {
+            "rating": 5,
+            "text": "[PLACEHOLDER: paste a real customer review]",
+            "author": "[PLACEHOLDER: customer name]",
+            "verified": false
+          }
         }
       },
-      "block_order": ["review-1"],
+      "block_order": [
+        "review-1"
+      ],
       "settings": {
         "heading": "What customers are saying",
-        "average_rating": "",
-        "review_count": "",
         "color_scheme": "scheme-1",
         "padding_top": 52,
         "padding_bottom": 52
@@ -286,13 +417,13 @@
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 28
       }
