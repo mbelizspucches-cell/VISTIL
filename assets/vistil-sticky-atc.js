@@ -4,7 +4,7 @@ if (!customElements.get('vistil-sticky-atc')) {
     class VistilStickyATC extends HTMLElement {
       connectedCallback() {
         this.priceEl = this.querySelector('[data-vistil-sticky-price]');
-        this.imageEl = this.querySelector('[data-vistil-sticky-image]');
+        this.imageEl = this.querySelector('.vistil-sticky-atc__thumb');
         this.ctaLabelEl = this.querySelector('[data-vistil-sticky-cta-label]');
         this.submitButton = this.querySelector('[data-vistil-sticky-submit]');
         this.defaultLabel = this.ctaLabelEl?.textContent.trim();

@@ -22,9 +22,9 @@
       <div class="vistil-sticky-atc__product">
         <div class="vistil-sticky-atc__image">
           {%- if current_variant.featured_image -%}
-            {{ current_variant.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: current_variant.featured_image.alt, class: 'vistil-sticky-atc__thumb', 'data-vistil-sticky-image': '' }}
+            {{ current_variant.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: current_variant.featured_image.alt, class: 'vistil-sticky-atc__thumb' }}
           {%- elsif product.featured_image -%}
-            {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: product.featured_image.alt, class: 'vistil-sticky-atc__thumb', 'data-vistil-sticky-image': '' }}
+            {{ product.featured_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: product.featured_image.alt, class: 'vistil-sticky-atc__thumb' }}
           {%- endif -%}
         </div>
         <div class="vistil-sticky-atc__info">
@@ -41,7 +41,7 @@
 
 {% schema %}
 {
-  "name": "VISTIL: Sticky add to cart",
+  "name": "VISTIL: Sticky ATC",
   "class": "section",
   "settings": [
     { "type": "text", "id": "cta_label", "label": "Button label", "default": "Add to cart" },
@@ -55,7 +55,7 @@
   ],
   "presets": [
     {
-      "name": "VISTIL: Sticky add to cart"
+      "name": "VISTIL: Sticky ATC"
     }
   ],
   "enabled_on": {
