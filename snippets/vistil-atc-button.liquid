@@ -1,0 +1,51 @@
+{% comment %}
+  Add-to-cart button that delegates to the main product form (see assets/vistil-product-bridge.js).
+
+  Accepts:
+  - label: {String} button label (defaults to the theme's add-to-cart translation)
+  - sold_out_label: {String} label shown when the selected variant is unavailable
+  - button_class: {String} extra classes for the <button>
+  - quantity: {Number} optional fixed quantity to set before submitting
+  - watch: {Boolean} lets the sticky bar hide while this button is on screen
+{% endcomment %}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+
+  assign label_text = 'products.product.add_to_cart' | t
+  if label != blank
+    assign label_text = label
+  endif
+
+  assign sold_out_text = 'products.product.sold_out' | t
+  if sold_out_label != blank
+    assign sold_out_text = sold_out_label
+  endif
+-%}
+<vistil-atc-button
+  class="vistil-atc"
+  data-label="{{ label_text | escape }}"
+  data-sold-out-label="{{ sold_out_text | escape }}"
+  {% if quantity %}
+    data-quantity="{{ quantity }}"
+  {% endif %}
+  {% if watch %}
+    data-vistil-cta-watch
+  {% endif %}
+>
+  <button
+    type="button"
+    class="button button--primary vistil-button{% if button_class %} {{ button_class }}{% endif %}"
+    {% unless current_variant.available %}
+      disabled aria-disabled="true"
+    {% endunless %}
+  >
+    <span data-atc-label>
+      {%- if current_variant.available -%}
+        {{ label_text | escape }}
+      {%- else -%}
+        {{ sold_out_text | escape }}
+      {%- endif -%}
+    </span>
+  </button>
+  <p class="vistil-atc__error" data-atc-error role="alert" hidden></p>
+</vistil-atc-button>

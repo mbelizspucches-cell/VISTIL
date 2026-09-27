@@ -33,26 +33,41 @@ specific customer question or removes a specific objection:
 | # | Section (in page order) | Funnel phase | Implementation |
 | --- | --- | --- | --- |
 | 1 | Announcement bar | Capture | Dawn stock `sections/announcement-bar.liquid` (`sections/header-group.json`) |
-| 2 | Header | Capture | Dawn stock `sections/header.liquid` |
-| 3 | Product hero | Capture | Dawn stock `sections/main-product.liquid` — gallery/video, title, price, variant picker, quick benefits (`icon_with_text` block available), buy buttons |
-| 4 | Social proof (initial) | Capture | `sections/vistil-social-proof.liquid` — stats and/or press logos |
-| 5 | What it is / what it does | Capture | Dawn stock `sections/rich-text.liquid`, presets as `characteristics` |
-| 6 | Quick scannable benefits | Convince | `sections/vistil-value-proposition.liquid` — icon + heading + text grid |
-| 7–9 | Offer/pricing + main CTA + micro-proof | Convince | `sections/vistil-offer.liquid` — quantity tiers, its own Add to Cart button, and a reassurance line right under it |
-| 10 | Objection-handling accordion | Convince | Dawn stock `sections/collapsible-content.liquid`, presets an 8-row FAQ (usage, shipping, contents, materials, size, guarantee, returns, other) |
-| 11 | Demonstration / transformation | Convince | `sections/vistil-transformation.liquid` — draggable before/after image slider |
-| 12 | Trust + guarantee | Close | `sections/vistil-trust-guarantee.liquid` |
-| 13 | Final reviews | Close | `sections/vistil-reviews.liquid` — manually curated, no review-app dependency |
-| — | Shipping/returns disclosures, related products | (Dawn utility, not part of the funnel) | Dawn stock `disclosures` / `related-products`, kept as-is |
-| 14 | Sticky Add to Cart | Close (always present) | `sections/vistil-sticky-atc.liquid` — mobile-first fixed bar |
+| 2 | Header | Capture | Dawn stock `sections/header.liquid` (VISTIL wordmark fallback) |
+| 3 | Product hero | Capture | Dawn `sections/main-product.liquid` + VISTIL blocks: `vistil_urgency` (urgency bar), `vistil_text` (eyebrow / subheadline / body / microcopy), `vistil_heading` (the page h1 — product title block set to h2), `vistil_checklist` (quick benefits). A disabled alternative headline block is kept for A/B tests |
+| 4 | Value proposition | Convince | `sections/vistil-value-proposition.liquid` — 4 benefits with VISTIL icons (`assets/icon-suction.svg`, `icon-uv-light.svg`, `icon-filter-grid.svg`, `icon-handheld.svg`) |
+| 5 | Central statement | Convince | Dawn stock `sections/rich-text.liquid` (`characteristics`) |
+| 6–8 | Pack selector + CTA + microcopy | Convince | `sections/vistil-offer.liquid` — 1× / 2× packs, prices computed from the real variant price |
+| 9 | FAQ / objections | Convince | Dawn stock `sections/collapsible-content.liquid` (8 questions) |
+| 10 | Demonstration | Convince | `sections/vistil-transformation.liquid` — optional looping video, before/after slider and usage images (nothing renders until real media is uploaded) |
+| 11 | Trust | Close | `sections/vistil-trust-guarantee.liquid` — 4 trust items, the approved guarantee + shipping photos, closing line |
+| 12 | Proof | Close | `sections/vistil-reviews.liquid` — factual proof cards until real reviews exist (add `review` blocks later, no app needed) |
+| 13 | What's in the box | Close | `sections/vistil-benefits.liquid` (`unboxing`) |
+| 14 | Final CTA | Close | `sections/vistil-final-cta.liquid` |
+| — | Disclosures, related products | (Dawn utility) | Dawn stock `disclosures` / `related-products` |
+| 15 | Sticky Add to Cart | Close | `sections/vistil-sticky-atc.liquid` — shows once the hero CTA has scrolled away, hides while another VISTIL CTA is on screen |
 
-`sections/vistil-benefits.liquid` (alternating image/text rows) was built as
-part of the original component library and is still available to drag into
-any template from the Theme Editor, but it isn't part of the default
-product-page flow above, since it isn't one of the funnel's required steps.
+`templates/product.json` is the default template for every product. When a
+second VISTIL product arrives (Glass, Air…), duplicate it as
+`templates/product.<name>.json` and assign it to that product, since the hero
+and section copy are VISTIL Fabric-specific. Product names in pack labels and
+the sticky bar come from `product.title`.
+
+The brand palette (Warm White, Charcoal, Deep Green, Sage, Soft Grey, Stone
+Beige) is applied through Dawn's color schemes (`config/settings_data.json`)
+and exposed as `--vistil-*` tokens in `layout/theme.liquid`.
 
 All `vistil-*` sections are reusable: add any of them to any other JSON
 template from the Theme Editor and it will just work.
+
+### Pack pricing
+
+A pack only sets the quantity on Dawn's product form, so the cart always
+charges `quantity × variant price`. To sell the 2× pack at a real discount,
+first create an automatic discount in Shopify (Discounts → minimum quantity 2),
+then enter the same amount in the pack's "Pack discount (€)" field: the page
+then shows the struck-through price and an "Ahorra X" badge. Leave it empty
+until that discount exists.
 
 ### No fabricated content
 
@@ -71,17 +86,17 @@ instance with real copy, or delete the block/section if it doesn't apply.
 Dawn's real add-to-cart logic lives entirely inside `sections/main-product.liquid`
 (the `<product-form>` custom element in `assets/product-form.js`, which
 already handles the fetch call, cart drawer/notification, and error states).
-Rather than duplicating that logic, `vistil-offer` and `vistil-sticky-atc`:
+Every VISTIL CTA (offer, sticky bar, final CTA) is a `<vistil-atc-button>`
+(`snippets/vistil-atc-button.liquid` + `assets/vistil-product-bridge.js`) that:
 
-1. Locate the real product form at runtime: `document.querySelector('product-info[id^="MainProduct-"]')`.
-2. Set its quantity input (if relevant) and click its real submit button.
-3. Listen for Dawn's own `variant-change` pub/sub event (`assets/constants.js`,
-   `assets/pubsub.js`) to mirror price/availability, filtering by
-   `event.data.sectionId` so quick-add modals for other products never leak in.
+1. Locates the real product form: `product-info[id^="MainProduct-"]`.
+2. Sets its quantity input when a pack is selected, then clicks its real submit button.
+3. Mirrors availability from Dawn's `variant-change` pub/sub event (filtered by
+   `event.data.sectionId`), and shows Dawn's `cart-error` message next to the
+   button that was clicked.
 
-This keeps cart behaviour, error handling, and cart-drawer integration in one
-place (Dawn's own code) and the custom sections are pure presentation +
-delegation.
+Cart behaviour, error handling and cart-drawer integration stay in one place
+(Dawn's own code); the VISTIL sections are presentation + delegation only.
 
 ## Local development
 

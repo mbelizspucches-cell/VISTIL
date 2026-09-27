@@ -41,7 +41,7 @@
     },
     "cart": {
       "view": "Ver carrito ({{ count }})",
-      "item_added": "Artículo agregado a tu carrito",
+      "item_added": "Artículo añadido a tu carrito",
       "view_empty_cart": "Ver carrito"
     },
     "share": {
@@ -107,7 +107,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Agregar al carrito",
+      "add_to_cart": "Añadir al carrito",
       "description": "Descripción",
       "on_sale": "Oferta",
       "quantity": {
@@ -369,9 +369,9 @@
       "variant": "Variante",
       "variant_total": "Total de variantes",
       "items_added": {
-        "one": "{{ quantity }} artículo agregado",
-        "other": "{{ quantity }} artículos agregados",
-        "many": "{{ quantity }} artículos agregados"
+        "one": "{{ quantity }} artículo añadido",
+        "other": "{{ quantity }} artículos añadidos",
+        "many": "{{ quantity }} artículos añadidos"
       },
       "items_removed": {
         "one": "{{ quantity }} artículo eliminado",

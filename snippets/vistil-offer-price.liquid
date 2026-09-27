@@ -1,0 +1,25 @@
+{% comment %}
+  Price for one offer tier, computed from the real variant price (money formatting stays server-side).
+
+  Accepts:
+  - variant: {Object} product variant
+  - quantity: {Number} units in the tier
+  - discount_cents: {Number} optional fixed discount for the tier, in cents
+{% endcomment %}
+{%- liquid
+  assign full_price = variant.price | times: quantity
+  assign unit_compare_at = variant.compare_at_price | default: 0
+  if unit_compare_at > variant.price
+    assign reference_price = unit_compare_at | times: quantity
+  else
+    assign reference_price = full_price
+  endif
+  assign final_price = full_price | minus: discount_cents
+  if final_price < 0
+    assign final_price = 0
+  endif
+-%}
+{%- if reference_price > final_price -%}
+  <s class="vistil-strike">{{ reference_price | money }}</s>
+{%- endif -%}
+<span class="vistil-offer__price-value">{{ final_price | money }}</span>
