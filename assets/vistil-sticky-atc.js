@@ -26,6 +26,7 @@ if (!customElements.get('vistil-sticky-atc')) {
         document.removeEventListener('vistil:pack-change', this.onPackChange);
         this.unsubscribe?.();
         this.observer?.disconnect();
+        this.passedObserver?.disconnect();
         document.body.classList.remove('vistil-sticky-atc-active');
       }
 
@@ -36,21 +37,33 @@ if (!customElements.get('vistil-sticky-atc')) {
         if (!this.mainCta || !('IntersectionObserver' in window)) return;
 
         this.otherCtas = Array.from(document.querySelectorAll('[data-vistil-cta-watch]'));
-        this.states = new Map();
+        this.visibleCtas = new Set();
+        this.mainPassed = false;
+
+        // The root is extended far below the viewport, so the main CTA only stops
+        // "intersecting" once it is above the viewport. This also catches jumps
+        // (anchors, fast flings, scroll restoration) that skip the visible range.
+        this.passedObserver = new IntersectionObserver(
+          ([entry]) => {
+            this.mainPassed = !entry.isIntersecting;
+            this.update();
+          },
+          { rootMargin: '0px 0px 100000px 0px' }
+        );
+        this.passedObserver.observe(this.mainCta);
 
         this.observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => this.states.set(entry.target, entry));
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) this.visibleCtas.add(entry.target);
+            else this.visibleCtas.delete(entry.target);
+          });
           this.update();
         });
-        [this.mainCta, ...this.otherCtas].forEach((el) => this.observer.observe(el));
+        this.otherCtas.forEach((el) => this.observer.observe(el));
       }
 
       update() {
-        const main = this.states.get(this.mainCta);
-        if (!main) return;
-        const mainPassed = !main.isIntersecting && main.boundingClientRect.bottom < 0;
-        const otherVisible = this.otherCtas.some((el) => this.states.get(el)?.isIntersecting);
-        this.setVisible(mainPassed && !otherVisible);
+        this.setVisible(this.mainPassed && this.visibleCtas.size === 0);
       }
 
       setVisible(visible) {
