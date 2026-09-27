@@ -5,8 +5,9 @@
 
 .vistil-eyebrow {
   display: block;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: var(--font-body-weight-medium);
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   opacity: 0.75;
