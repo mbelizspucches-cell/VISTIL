@@ -263,7 +263,7 @@
           "type": "collapsible_row",
           "settings": {
             "heading": "How long does shipping take?",
-            "row_content": "<p>[PLACEHOLDER: real shipping times]</p>"
+            "row_content": "<p>Envío en 24/48h, preparado desde nuestro almacén en España.</p>"
           }
         },
         "row-3": {
@@ -291,14 +291,14 @@
           "type": "collapsible_row",
           "settings": {
             "heading": "What's your guarantee?",
-            "row_content": "<p>[PLACEHOLDER: real guarantee policy]</p>"
+            "row_content": "<p>Tienes 90 días para devolver tu pedido. Proceso sencillo y sin complicaciones.</p>"
           }
         },
         "row-7": {
           "type": "collapsible_row",
           "settings": {
             "heading": "What if I need to return it?",
-            "row_content": "<p>[PLACEHOLDER: real returns policy]</p>"
+            "row_content": "<p>Escríbenos y te guiamos en el proceso de devolución — tienes 90 días desde la recepción del pedido.</p>"
           }
         },
         "row-8": {
@@ -364,6 +364,19 @@
         "padding_bottom": 52
       }
     },
+    "shipping-trust": {
+      "type": "vistil-trust-guarantee",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "image_alt": "Envío 24/48h VISTIL, preparado desde nuestro almacén en España",
+        "fallback_image": "shipping",
+        "guarantee_icon": "none",
+        "guarantee_heading": "Envío 24/48h",
+        "guarantee_text": "<p>Preparado desde nuestro almacén en España.</p>",
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
     "trust-guarantee": {
       "type": "vistil-trust-guarantee",
       "blocks": {
@@ -378,14 +391,14 @@
           "type": "badge",
           "settings": {
             "icon": "truck",
-            "text": "[PLACEHOLDER: real shipping promise]"
+            "text": "Envío 24/48h"
           }
         },
         "badge-3": {
           "type": "badge",
           "settings": {
             "icon": "return",
-            "text": "[PLACEHOLDER: real returns promise]"
+            "text": "Devolución en 90 días"
           }
         }
       },
@@ -396,9 +409,11 @@
       ],
       "settings": {
         "color_scheme": "scheme-2",
+        "image_alt": "Compra con tranquilidad — garantía de devolución VISTIL",
+        "fallback_image": "guarantee",
         "guarantee_icon": "checkmark",
-        "guarantee_heading": "[PLACEHOLDER: your real guarantee policy]",
-        "guarantee_text": "<p>[PLACEHOLDER: describe your real return/refund policy]</p>",
+        "guarantee_heading": "Tienes 90 días para devolver tu pedido",
+        "guarantee_text": "<p>Proceso sencillo y sin complicaciones.</p>",
         "padding_top": 44,
         "padding_bottom": 44
       }
@@ -469,6 +484,7 @@
     "objections",
     "transformation",
     "unboxing",
+    "shipping-trust",
     "trust-guarantee",
     "reviews",
     "disclosures",

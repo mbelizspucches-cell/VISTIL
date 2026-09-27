@@ -18,8 +18,12 @@
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
     {%- assign badge_blocks = section.blocks | where: 'type', 'badge' -%}
+    {%- assign has_fallback_image = false -%}
+    {%- if section.settings.image == blank and section.settings.fallback_image != 'none' -%}
+      {%- assign has_fallback_image = true -%}
+    {%- endif -%}
 
-    <div class="vistil-trust__layout{% if section.settings.image != blank %} vistil-trust__layout--with-image{% endif %}">
+    <div class="vistil-trust__layout{% if section.settings.image != blank or has_fallback_image %} vistil-trust__layout--with-image{% endif %}">
       {%- if section.settings.image != blank -%}
         <div class="vistil-trust__media">
           {{
@@ -27,6 +31,19 @@
             | image_url: width: 1200
             | image_tag: loading: 'lazy', alt: section.settings.image_alt, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400, 600, 900, 1200'
           }}
+        </div>
+      {%- elsif has_fallback_image -%}
+        {%- comment -%}
+          No image uploaded via Theme Editor yet: fall back to the approved
+          real photo shipped with the theme. Upload your own above to
+          override this at any time.
+        {%- endcomment -%}
+        <div class="vistil-trust__media">
+          {%- if section.settings.fallback_image == 'guarantee' -%}
+            <img src="{{ 'vistil-trust-guarantee.webp' | asset_url }}" alt="{{ section.settings.image_alt | default: 'Garantía y devoluciones VISTIL' | escape }}" loading="lazy" width="1536" height="1024">
+          {%- elsif section.settings.fallback_image == 'shipping' -%}
+            <img src="{{ 'vistil-trust-shipping.webp' | asset_url }}" alt="{{ section.settings.image_alt | default: 'Envío 24/48h VISTIL' | escape }}" loading="lazy" width="1254" height="1254">
+          {%- endif -%}
         </div>
       {%- endif -%}
 
@@ -83,6 +100,17 @@
     },
     { "type": "image_picker", "id": "image", "label": "Trust image", "info": "Optional real photo — e.g. shipping, guarantee/return process, or packaging. Leave blank to show text only." },
     { "type": "text", "id": "image_alt", "label": "Image alt text" },
+    {
+      "type": "select",
+      "id": "fallback_image",
+      "label": "Default image (shown until you upload one above)",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "guarantee", "label": "Guarantee / returns photo" },
+        { "value": "shipping", "label": "Shipping photo" }
+      ],
+      "default": "none"
+    },
     {
       "type": "header",
       "content": "Guarantee callout"
