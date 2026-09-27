@@ -22,7 +22,7 @@
   color: rgb(var(--vistil-deep-green));
 }
 
-.vistil-value-prop__icon svg {
+.vistil-value-prop__icon .svg-wrapper {
   width: 2.4rem;
   height: 2.4rem;
 }

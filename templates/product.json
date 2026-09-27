@@ -271,56 +271,64 @@
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Cómo se usa?",
-            "row_content": "<p>Pasa VISTIL Fabric lentamente sobre colchones, sofás u otros textiles. Vacía el depósito y revisa el filtro cuando sea necesario.</p>"
+            "row_content": "<p>Pasa VISTIL Fabric lentamente sobre colchones, sofás u otros textiles. Vacía el depósito y revisa el filtro cuando sea necesario.</p>",
+            "icon": "none"
           }
         },
         "row-2": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Cuánto tarda el envío?",
-            "row_content": "<p>Los pedidos se preparan desde nuestro almacén en España y el plazo estimado de entrega es de 24/48 horas laborables.</p>"
+            "row_content": "<p>Los pedidos se preparan desde nuestro almacén en España y el plazo estimado de entrega es de 24/48 horas laborables.</p>",
+            "icon": "none"
           }
         },
         "row-3": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Qué incluye la caja?",
-            "row_content": "<p>Incluye VISTIL Fabric y los componentes suministrados con el producto. Estamos verificando el contenido exacto antes de publicar el listado definitivo.</p>"
+            "row_content": "<p>Incluye VISTIL Fabric y los componentes suministrados con el producto. Estamos verificando el contenido exacto antes de publicar el listado definitivo.</p>",
+            "icon": "none"
           }
         },
         "row-4": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Dónde puedo utilizarlo?",
-            "row_content": "<p>En colchones, almohadas, sofás, alfombras, peluches y otros textiles del hogar.</p>"
+            "row_content": "<p>En colchones, almohadas, sofás, alfombras, peluches y otros textiles del hogar.</p>",
+            "icon": "none"
           }
         },
         "row-5": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Qué hace exactamente?",
-            "row_content": "<p>Combina aspiración y luz UV para ayudar a retirar polvo, ácaros y otras partículas acumuladas en superficies textiles.</p>"
+            "row_content": "<p>Combina aspiración y luz UV para ayudar a retirar polvo, ácaros y otras partículas acumuladas en superficies textiles.</p>",
+            "icon": "none"
           }
         },
         "row-6": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Cómo se limpia y mantiene?",
-            "row_content": "<p>Vacía el depósito regularmente y retira el filtro para su mantenimiento siguiendo las instrucciones del producto.</p>"
+            "row_content": "<p>Vacía el depósito regularmente y retira el filtro para su mantenimiento siguiendo las instrucciones del producto.</p>",
+            "icon": "none"
           }
         },
         "row-7": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Qué garantía y devolución tengo?",
-            "row_content": "<p>Dispones de 90 días para solicitar la devolución de tu pedido según nuestra política de devoluciones.</p>"
+            "row_content": "<p>Dispones de 90 días para solicitar la devolución de tu pedido según nuestra política de devoluciones.</p>",
+            "icon": "none"
           }
         },
         "row-8": {
           "type": "collapsible_row",
           "settings": {
             "heading": "¿Tienes alguna otra pregunta?",
-            "row_content": "<p>Escríbenos desde nuestra página de contacto y te ayudaremos con cualquier duda sobre VISTIL Fabric o tu pedido.</p>"
+            "row_content": "<p>Escríbenos desde nuestra página de contacto y te ayudaremos con cualquier duda sobre VISTIL Fabric o tu pedido.</p>",
+            "icon": "none"
           }
         }
       },
@@ -495,7 +503,8 @@
             "heading": "Todo lo que recibes",
             "bullet_1": "VISTIL Fabric",
             "bullet_2": "[PLACEHOLDER: accesorio real confirmado]",
-            "bullet_3": "[PLACEHOLDER: accesorio real confirmado]"
+            "bullet_3": "[PLACEHOLDER: accesorio real confirmado]",
+            "text": ""
           }
         }
       },

@@ -41,7 +41,7 @@
   color: rgb(var(--vistil-deep-green));
 }
 
-.vistil-trust__item-icon svg {
+.vistil-trust__item-icon .svg-wrapper {
   width: 2.2rem;
   height: 2.2rem;
 }

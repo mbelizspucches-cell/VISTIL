@@ -1,0 +1,36 @@
+.vistil-final-cta {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+
+.vistil-final-cta__text {
+  max-width: 52rem;
+  margin: 0 auto 2.8rem;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.vistil-final-cta__text p {
+  margin: 0;
+}
+
+.vistil-final-cta__action {
+  display: flex;
+  justify-content: center;
+}
+
+.vistil-final-cta__action .vistil-atc {
+  width: 100%;
+  max-width: 40rem;
+}
+
+.vistil-final-cta .vistil-final-cta__button {
+  width: 100%;
+  min-height: 5.2rem;
+  font-size: 1.6rem;
+}
+
+.vistil-final-cta__microcopy {
+  margin: 1.2rem 0 0;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.75);
+}

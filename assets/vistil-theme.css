@@ -1,9 +1,12 @@
 /* Shared building blocks for VISTIL custom sections.
    Loaded (cached) by every section file prefixed "vistil-".
    Relies on Dawn's existing color-scheme / spacing / typography tokens
-   so custom sections stay visually consistent with the rest of the theme. */
+   so custom sections stay visually consistent with the rest of the theme.
+   Base rules use :where() (zero specificity): this file is linked once per
+   section, so its last <link> comes late in the cascade — zero specificity
+   keeps section-level overrides winning regardless of link order. */
 
-.vistil-eyebrow {
+:where(.vistil-eyebrow) {
   display: block;
   font-family: var(--font-body-family);
   font-size: 1.3rem;
@@ -14,17 +17,17 @@
   margin: 0 0 0.8rem;
 }
 
-.vistil-heading {
+:where(.vistil-heading) {
   margin: 0 0 1.2rem;
 }
 
-.vistil-subheading {
+:where(.vistil-subheading) {
   max-width: 60rem;
   margin: 0 auto 3rem;
   opacity: 0.85;
 }
 
-.vistil-subheading p {
+:where(.vistil-subheading) p {
   margin: 0;
 }
 
@@ -44,20 +47,19 @@
   background: rgba(var(--color-foreground), 0.06);
 }
 
-.vistil-icon {
+:where(.vistil-icon) {
   display: inline-flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
 }
 
-.vistil-icon svg,
-.vistil-icon .svg-wrapper svg {
+:where(.vistil-icon) .svg-wrapper {
   width: 2.8rem;
   height: 2.8rem;
 }
 
-.vistil-button {
+:where(.vistil-button) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -67,7 +69,7 @@
 }
 
 @media screen and (min-width: 750px) {
-  .vistil-button {
+  :where(.vistil-button) {
     width: auto;
   }
 }

@@ -1,0 +1,100 @@
+/* VISTIL blocks rendered inside Dawn's main-product section. */
+
+.vistil-urgency {
+  display: block;
+  margin: 0;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.4rem;
+  background: var(--vistil-urgency-bg, rgb(var(--vistil-deep-green)));
+  color: var(--vistil-urgency-fg, rgb(var(--vistil-warm-white)));
+  font-family: var(--font-body-family);
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-urgency {
+    font-size: 1.3rem;
+  }
+}
+
+.product__info-container > .vistil-urgency + * {
+  margin-top: 2rem;
+}
+
+.vistil-product-heading {
+  margin: 0;
+}
+
+.product__info-container .vistil-product-text {
+  margin-bottom: 0;
+}
+
+.vistil-product-text--eyebrow {
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: var(--font-body-weight-medium);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.product__info-container > .vistil-product-text--eyebrow + * {
+  margin-top: 0.8rem;
+}
+
+.vistil-product-text--subheadline {
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: rgba(var(--color-foreground), 0.85);
+}
+
+.product__info-container > .vistil-product-heading + .vistil-product-text--subheadline {
+  margin-top: 1rem;
+}
+
+.vistil-product-text--body {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.vistil-product-text--small {
+  font-size: 1.4rem;
+  line-height: 1.45;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.vistil-product-name {
+  margin: 0;
+}
+
+.vistil-checklist {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.vistil-checklist__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: rgb(var(--color-foreground));
+}
+
+.vistil-checklist__item .svg-wrapper {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0.2rem;
+  color: rgb(var(--vistil-deep-green));
+}
+
+.vistil-checklist__item .svg-wrapper svg {
+  width: 2rem;
+  height: 2rem;
+  fill: currentColor;
+}
