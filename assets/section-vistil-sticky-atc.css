@@ -4,10 +4,12 @@
   right: 0;
   bottom: 0;
   z-index: 40;
-  transform: translateY(100%);
+  display: block;
+  transform: translateY(110%);
   transition: transform var(--duration-medium, 300ms) ease;
+  background: rgb(var(--color-background));
   border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
-  box-shadow: 0 -0.2rem 1rem rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -0.2rem 1rem rgba(var(--vistil-charcoal), 0.08);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
@@ -15,20 +17,40 @@
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .vistil-sticky-atc {
+    transition: none;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-sticky-atc--mobile-only {
+    display: none;
+  }
+}
+
+body.vistil-sticky-atc-active {
+  padding-bottom: var(--vistil-sticky-atc-height, 0);
+}
+
 .vistil-sticky-atc__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.6rem;
+  gap: 1.2rem;
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.6rem;
 }
 
 .vistil-sticky-atc__product {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 1rem;
   min-width: 0;
+}
+
+.vistil-sticky-atc__image {
+  flex-shrink: 0;
 }
 
 .vistil-sticky-atc__image img {
@@ -43,31 +65,76 @@
   min-width: 0;
 }
 
-.vistil-sticky-atc__title {
+.vistil-sticky-atc__info p {
   margin: 0;
-  font-size: 1.3rem;
-  font-weight: 600;
+}
+
+.vistil-sticky-atc__urgency {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(var(--vistil-deep-green));
+}
+
+.vistil-sticky-atc__title {
+  font-size: 1.4rem;
+  font-weight: var(--font-body-weight-medium, 600);
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 22rem;
+  color: rgb(var(--color-foreground));
 }
 
 .vistil-sticky-atc__price {
-  margin: 0.2rem 0 0;
-  font-size: 1.3rem;
-  opacity: 0.8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.vistil-sticky-atc__price .vistil-strike {
+  margin: 0;
+}
+
+.vistil-sticky-atc__cta {
+  flex-shrink: 0;
 }
 
 .vistil-sticky-atc__submit {
-  flex-shrink: 0;
   width: auto;
-  padding-left: 2.4rem;
-  padding-right: 2.4rem;
+  min-width: 0;
+  min-height: 4.4rem;
+  padding-left: 1.8rem;
+  padding-right: 1.8rem;
   white-space: nowrap;
+  font-size: 1.4rem;
 }
 
-@media screen and (min-width: 990px) {
+.vistil-sticky-atc .vistil-atc__error {
+  max-width: 20rem;
+  font-size: 1.2rem;
+}
+
+.vistil-sticky-atc__microcopy {
+  margin: 0;
+  padding: 0 1.5rem 0.8rem;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  text-align: center;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-sticky-atc__submit {
+    padding-left: 2.8rem;
+    padding-right: 2.8rem;
+  }
+
   .vistil-sticky-atc__title {
     max-width: 40rem;
   }

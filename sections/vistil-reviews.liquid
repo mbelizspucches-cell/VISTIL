@@ -1,6 +1,7 @@
 {% comment %}
-  Manually curated reviews section — no review-app dependency.
-  Merchants add one "review" block per testimonial from the theme editor.
+  Social proof section. Until real reviews exist it shows "proof" cards (factual,
+  product-based statements). Add "review" blocks with genuine customer reviews
+  later and remove the proof cards — no review app needed.
 {% endcomment %}
 {{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
 {{ 'section-vistil-reviews.css' | asset_url | stylesheet_tag }}
@@ -19,12 +20,13 @@
   }
 {%- endstyle -%}
 
-{%- assign review_blocks = section.blocks | where: 'type', 'review' -%}
-
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="page-width section-{{ section.id }}-padding">
     {%- if section.settings.heading != blank -%}
       <h2 class="vistil-heading vistil-center {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subheading != blank -%}
+      <div class="vistil-subheading vistil-center rte">{{ section.settings.subheading }}</div>
     {%- endif -%}
 
     {%- if section.settings.average_rating != blank -%}
@@ -35,45 +37,68 @@
           {%- endfor -%}
         </span>
         <p>
-          <strong>{{ section.settings.average_rating }}/5</strong>
+          <strong>{{ section.settings.average_rating | escape }}/5</strong>
           {%- if section.settings.review_count != blank -%}
-            &nbsp;·&nbsp;{{ section.settings.review_count | escape }} reviews
+            &nbsp;·&nbsp;{{ section.settings.review_count | escape }} valoraciones
           {%- endif -%}
         </p>
       </div>
     {%- endif -%}
 
-    {%- if review_blocks.size > 0 -%}
+    {%- if section.blocks.size > 0 -%}
       <div class="vistil-reviews__grid vistil-grid">
-        {%- for block in review_blocks -%}
-          <div class="vistil-reviews__card" {{ block.shopify_attributes }}>
-            {%- if block.settings.rating != blank -%}
-              <span class="vistil-reviews__card-stars" aria-hidden="true">
-                {%- assign rating_int = block.settings.rating | round -%}
-                {%- for i in (1..5) -%}
-                  {%- if i <= rating_int -%}
-                    {%- render 'icon-accordion', icon: 'star' -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              </span>
-              <span class="vistil-visually-hidden">{{ block.settings.rating }} out of 5 stars</span>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="vistil-reviews__card-text">&ldquo;{{ block.settings.text | escape }}&rdquo;</p>
-            {%- endif -%}
-            <div class="vistil-reviews__card-author">
-              {%- if block.settings.avatar != blank -%}
-                {{ block.settings.avatar | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.author }}
-              {%- endif -%}
-              <span>
-                <strong>{{ block.settings.author | escape }}</strong>
-                {%- if block.settings.verified -%}
-                  <span class="vistil-reviews__verified">{%- render 'icon-accordion', icon: 'checkmark' -%}Verified buyer</span>
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'proof' -%}
+              <div class="vistil-reviews__card vistil-reviews__card--proof" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="h4 vistil-reviews__proof-title">{{ block.settings.title | escape }}</h3>
                 {%- endif -%}
-              </span>
-            </div>
-          </div>
+                {%- if block.settings.text != blank -%}
+                  <p class="vistil-reviews__proof-text">{{ block.settings.text | escape }}</p>
+                {%- endif -%}
+              </div>
+            {%- when 'review' -%}
+              <div class="vistil-reviews__card" {{ block.shopify_attributes }}>
+                {%- if block.settings.rating != blank -%}
+                  <span class="vistil-reviews__card-stars" aria-hidden="true">
+                    {%- assign rating_int = block.settings.rating | round -%}
+                    {%- for i in (1..5) -%}
+                      {%- if i <= rating_int -%}
+                        {%- render 'icon-accordion', icon: 'star' -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </span>
+                  <span class="vistil-visually-hidden">{{ block.settings.rating }} de 5 estrellas</span>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="vistil-reviews__card-text">&ldquo;{{ block.settings.text | escape }}&rdquo;</p>
+                {%- endif -%}
+                <div class="vistil-reviews__card-author">
+                  {%- if block.settings.avatar != blank -%}
+                    {{ block.settings.avatar | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.author }}
+                  {%- endif -%}
+                  <span>
+                    <strong>{{ block.settings.author | escape }}</strong>
+                    {%- if block.settings.verified -%}
+                      <span class="vistil-reviews__verified">{%- render 'icon-accordion', icon: 'checkmark' -%}Compra verificada</span>
+                    {%- endif -%}
+                  </span>
+                </div>
+              </div>
+          {%- endcase -%}
         {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.closing_heading != blank or section.settings.closing_text != blank -%}
+      <div class="vistil-reviews__closing vistil-center">
+        {%- if section.settings.closing_heading != blank -%}
+          <p class="h3 vistil-reviews__closing-heading">{{ section.settings.closing_heading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.closing_text != blank -%}
+          <div class="rte">{{ section.settings.closing_text }}</div>
+        {%- endif -%}
       </div>
     {%- endif -%}
   </div>
@@ -81,10 +106,10 @@
 
 {% schema %}
 {
-  "name": "VISTIL: Reviews",
+  "name": "VISTIL: Proof / reviews",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "What customers are saying" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Lo importante se ve en el uso." },
     {
       "type": "select",
       "id": "heading_size",
@@ -92,11 +117,18 @@
         { "value": "h2", "label": "Small" },
         { "value": "h1", "label": "Medium" }
       ],
-      "default": "h1",
+      "default": "h2",
       "label": "Heading size"
     },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
     { "type": "text", "id": "average_rating", "label": "Average rating", "info": "Only enter your real, current average rating. Leave blank to hide." },
     { "type": "text", "id": "review_count", "label": "Review count", "info": "Only enter your real review count. Leave blank to hide." },
+    {
+      "type": "header",
+      "content": "Closing"
+    },
+    { "type": "text", "id": "closing_heading", "label": "Closing heading" },
+    { "type": "richtext", "id": "closing_text", "label": "Closing text" },
     {
       "type": "color_scheme",
       "id": "color_scheme",
@@ -130,24 +162,32 @@
   ],
   "blocks": [
     {
+      "type": "proof",
+      "name": "Proof card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Título" },
+        { "type": "textarea", "id": "text", "label": "Text", "info": "Factual statements about the product only — no invented customers, ratings or results." }
+      ]
+    },
+    {
       "type": "review",
       "name": "Review",
       "settings": [
         { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "textarea", "id": "text", "label": "Review text", "info": "Paste a real customer review only — never fabricated.", "default": "[PLACEHOLDER: paste a real customer review]" },
-        { "type": "text", "id": "author", "label": "Author name", "info": "Use the real customer's name (or their initials/first name for privacy).", "default": "[PLACEHOLDER: customer name]" },
-        { "type": "checkbox", "id": "verified", "label": "Show verified buyer badge", "info": "Only enable if this is a genuine verified purchase.", "default": false },
+        { "type": "textarea", "id": "text", "label": "Review text", "info": "Paste a real customer review only — never fabricated.", "default": "[PLACEHOLDER: pega aquí una reseña real]" },
+        { "type": "text", "id": "author", "label": "Author name", "info": "Use the real customer's name (or their initials/first name for privacy).", "default": "[PLACEHOLDER: nombre del cliente]" },
+        { "type": "checkbox", "id": "verified", "label": "Show verified purchase badge", "info": "Only enable if this is a genuine verified purchase.", "default": false },
         { "type": "image_picker", "id": "avatar", "label": "Avatar (optional)" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "VISTIL: Reviews",
+      "name": "VISTIL: Proof / reviews",
       "blocks": [
-        { "type": "review" },
-        { "type": "review" },
-        { "type": "review" }
+        { "type": "proof" },
+        { "type": "proof" },
+        { "type": "proof" }
       ]
     }
   ],

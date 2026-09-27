@@ -12,20 +12,71 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "urgency": {
+          "type": "vistil_urgency",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
+            "text": "YA ES VIRAL | ÚLTIMAS UNIDADES",
+            "background": "#31473D",
+            "foreground": "#F7F7F3"
+          }
+        },
+        "eyebrow": {
+          "type": "vistil_text",
+          "settings": {
+            "text": "Cuidado de textiles",
+            "style": "eyebrow"
+          }
+        },
+        "headline": {
+          "type": "vistil_heading",
+          "settings": {
+            "heading": "Lo que no ves también se acumula.",
+            "heading_tag": "h1",
+            "heading_size": "h1"
+          }
+        },
+        "headline_alt": {
+          "type": "vistil_heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Tu colchón puede parecer limpio. Eso no significa que lo esté.",
+            "heading_tag": "h1",
+            "heading_size": "h1"
+          }
+        },
+        "subheadline": {
+          "type": "vistil_text",
+          "settings": {
+            "text": "Aspiración + luz UV para colchones, sofás y otros textiles.",
+            "style": "subheadline"
           }
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+            "heading_tag": "h2",
+            "heading_size": "h4"
+          }
         },
         "price": {
           "type": "price",
           "settings": {}
+        },
+        "explanation": {
+          "type": "vistil_text",
+          "settings": {
+            "text": "VISTIL Fabric ayuda a retirar polvo y partículas acumuladas en superficies textiles con un formato compacto y fácil de usar.",
+            "style": "body"
+          }
+        },
+        "benefits": {
+          "type": "vistil_checklist",
+          "settings": {
+            "item_1": "Aspiración para textiles",
+            "item_2": "Luz UV integrada",
+            "item_3": "Depósito transparente",
+            "item_4": "Diseño compacto y manejable"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -41,8 +92,15 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
+          }
+        },
+        "microcopy": {
+          "type": "vistil_text",
+          "settings": {
+            "text": "Envío 24/48h desde España · 90 días para devoluciones",
+            "style": "small"
           }
         },
         "description": {
@@ -52,17 +110,24 @@
         "share": {
           "type": "share",
           "settings": {
-            "share_label": "Share"
+            "share_label": "Compartir"
           }
         }
       },
       "block_order": [
-        "vendor",
+        "urgency",
+        "eyebrow",
+        "headline",
+        "headline_alt",
+        "subheadline",
         "title",
         "price",
+        "explanation",
+        "benefits",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "microcopy",
         "description",
         "share"
       ],
@@ -82,115 +147,39 @@
         "padding_bottom": 12
       }
     },
-    "social-proof": {
-      "type": "vistil-social-proof",
-      "blocks": {
-        "stat-1": {
-          "type": "stat",
-          "settings": {
-            "number": "[PLACEHOLDER]",
-            "label": "[PLACEHOLDER: e.g. verified reviews]"
-          }
-        },
-        "stat-2": {
-          "type": "stat",
-          "settings": {
-            "number": "[PLACEHOLDER]",
-            "label": "[PLACEHOLDER: e.g. average rating]"
-          }
-        },
-        "stat-3": {
-          "type": "stat",
-          "settings": {
-            "number": "[PLACEHOLDER]",
-            "label": "[PLACEHOLDER: e.g. shipping time]"
-          }
-        }
-      },
-      "block_order": [
-        "stat-1",
-        "stat-2",
-        "stat-3"
-      ],
-      "settings": {
-        "heading": "[PLACEHOLDER: overline trust statement — real claims only]",
-        "color_scheme": "scheme-2",
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
-    },
-    "characteristics": {
-      "type": "rich-text",
-      "blocks": {
-        "caption": {
-          "type": "caption",
-          "settings": {
-            "caption": "[PLACEHOLDER: category / eyebrow]",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "medium"
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "[PLACEHOLDER: what this product is]",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>[PLACEHOLDER: a short, clear explanation of what the product is and what it does — no medical or performance claims that aren't verified]</p>"
-          }
-        }
-      },
-      "block_order": [
-        "caption",
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 28
-      }
-    },
     "value-proposition": {
       "type": "vistil-value-proposition",
       "blocks": {
         "value-1": {
           "type": "value",
           "settings": {
-            "icon": "truck",
-            "heading": "[PLACEHOLDER: benefit]",
-            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+            "icon": "suction",
+            "heading": "Aspiración directa sobre textiles",
+            "text": "<p>Ayuda a retirar polvo, ácaros y otras partículas acumuladas en la superficie.</p>"
           }
         },
         "value-2": {
           "type": "value",
           "settings": {
-            "icon": "lock",
-            "heading": "[PLACEHOLDER: benefit]",
-            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+            "icon": "uv_light",
+            "heading": "Luz UV integrada",
+            "text": "<p>Añade una función adicional de cuidado durante el uso.</p>"
           }
         },
         "value-3": {
           "type": "value",
           "settings": {
-            "icon": "return",
-            "heading": "[PLACEHOLDER: benefit]",
-            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+            "icon": "filter_grid",
+            "heading": "Depósito transparente + filtro extraíble",
+            "text": "<p>Puedes ver lo que retiras y acceder fácilmente al filtro para su mantenimiento.</p>"
           }
         },
         "value-4": {
           "type": "value",
           "settings": {
-            "icon": "heart",
-            "heading": "[PLACEHOLDER: benefit]",
-            "text": "<p>[PLACEHOLDER: one short, scannable benefit]</p>"
+            "icon": "handheld",
+            "heading": "Compacto y fácil de usar",
+            "text": "<p>Diseñado para colchones, almohadas, sofás, alfombras, peluches y otros textiles del hogar.</p>"
           }
         }
       },
@@ -201,12 +190,44 @@
         "value-4"
       ],
       "settings": {
-        "heading": "[PLACEHOLDER: quick benefits heading]",
-        "heading_size": "h1",
+        "heading": "Más que cambiar las sábanas.",
+        "heading_size": "h2",
+        "subheading": "<p>VISTIL Fabric está diseñado para ayudarte a limpiar donde la rutina diaria no llega: colchones, sofás, almohadas y otros textiles del hogar.</p>",
+        "footnote": "Botón de encendido integrado en el mango.",
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "characteristics": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Limpieza visible para los textiles que más usas.",
+            "heading_size": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Porque que algo se vea limpio no significa que no acumule polvo y partículas con el uso diario.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "offer": {
@@ -216,37 +237,31 @@
           "type": "tier",
           "settings": {
             "quantity": 1,
-            "label": "1x"
+            "highlighted": false
           }
         },
         "tier-2": {
           "type": "tier",
           "settings": {
             "quantity": 2,
-            "label": "2x",
-            "highlighted": true
-          }
-        },
-        "tier-3": {
-          "type": "tier",
-          "settings": {
-            "quantity": 3,
-            "label": "3x"
+            "highlighted": false
           }
         }
       },
       "block_order": [
         "tier-1",
-        "tier-2",
-        "tier-3"
+        "tier-2"
       ],
       "settings": {
-        "heading": "[PLACEHOLDER: offer heading]",
-        "cta_label": "Add to cart",
-        "reassurance_text": "[PLACEHOLDER: real reassurance / micro-proof text]",
+        "heading": "Elige la opción que mejor encaje en tu hogar",
+        "heading_size": "h2",
+        "cta_label": "Añadir al carrito",
+        "sold_out_label": "Agotado",
+        "reassurance_text": "Envío 24/48h desde España · 90 días para devoluciones · Pago seguro",
+        "support_text": "<p>Compra con tranquilidad. Si no encaja contigo, tienes 90 días para devolver tu pedido.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "objections": {
@@ -255,57 +270,57 @@
         "row-1": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How do I use it?",
-            "row_content": "<p>[PLACEHOLDER: real usage instructions]</p>"
+            "heading": "¿Cómo se usa?",
+            "row_content": "<p>Pasa VISTIL Fabric lentamente sobre colchones, sofás u otros textiles. Vacía el depósito y revisa el filtro cuando sea necesario.</p>"
           }
         },
         "row-2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "How long does shipping take?",
-            "row_content": "<p>Envío en 24/48h, preparado desde nuestro almacén en España.</p>"
+            "heading": "¿Cuánto tarda el envío?",
+            "row_content": "<p>Los pedidos se preparan desde nuestro almacén en España y el plazo estimado de entrega es de 24/48 horas laborables.</p>"
           }
         },
         "row-3": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What's included?",
-            "row_content": "<p>[PLACEHOLDER: real contents of the package]</p>"
+            "heading": "¿Qué incluye la caja?",
+            "row_content": "<p>Incluye VISTIL Fabric y los componentes suministrados con el producto. Estamos verificando el contenido exacto antes de publicar el listado definitivo.</p>"
           }
         },
         "row-4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What is it made of?",
-            "row_content": "<p>[PLACEHOLDER: real materials]</p>"
+            "heading": "¿Dónde puedo utilizarlo?",
+            "row_content": "<p>En colchones, almohadas, sofás, alfombras, peluches y otros textiles del hogar.</p>"
           }
         },
         "row-5": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What size is it?",
-            "row_content": "<p>[PLACEHOLDER: real dimensions/measurements]</p>"
+            "heading": "¿Qué hace exactamente?",
+            "row_content": "<p>Combina aspiración y luz UV para ayudar a retirar polvo, ácaros y otras partículas acumuladas en superficies textiles.</p>"
           }
         },
         "row-6": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What's your guarantee?",
-            "row_content": "<p>Tienes 90 días para devolver tu pedido. Proceso sencillo y sin complicaciones.</p>"
+            "heading": "¿Cómo se limpia y mantiene?",
+            "row_content": "<p>Vacía el depósito regularmente y retira el filtro para su mantenimiento siguiendo las instrucciones del producto.</p>"
           }
         },
         "row-7": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "What if I need to return it?",
-            "row_content": "<p>Escríbenos y te guiamos en el proceso de devolución — tienes 90 días desde la recepción del pedido.</p>"
+            "heading": "¿Qué garantía y devolución tengo?",
+            "row_content": "<p>Dispones de 90 días para solicitar la devolución de tu pedido según nuestra política de devoluciones.</p>"
           }
         },
         "row-8": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Other questions?",
-            "row_content": "<p>[PLACEHOLDER: link to a full FAQ page or contact info]</p>"
+            "heading": "¿Tienes alguna otra pregunta?",
+            "row_content": "<p>Escríbenos desde nuestra página de contacto y te ayudaremos con cualquier duda sobre VISTIL Fabric o tu pedido.</p>"
           }
         }
       },
@@ -320,25 +335,154 @@
         "row-8"
       ],
       "settings": {
-        "heading": "Common questions",
-        "heading_size": "h1",
+        "heading": "Preguntas frecuentes",
+        "heading_size": "h2",
         "layout": "none",
         "container_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "open_first_collapsible_row": true,
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "transformation": {
       "type": "vistil-transformation",
+      "blocks": {
+        "usage-mattress": {
+          "type": "media",
+          "settings": {
+            "caption": "VISTIL Fabric sobre un colchón"
+          }
+        },
+        "usage-tank": {
+          "type": "media",
+          "settings": {
+            "caption": "Depósito transparente tras el uso"
+          }
+        },
+        "usage-sofa": {
+          "type": "media",
+          "settings": {
+            "caption": "VISTIL Fabric sobre un sofá"
+          }
+        }
+      },
+      "block_order": [
+        "usage-mattress",
+        "usage-tank",
+        "usage-sofa"
+      ],
       "settings": {
-        "heading": "[PLACEHOLDER: demonstration heading]",
-        "before_label": "Before",
-        "after_label": "After",
+        "eyebrow": "Demostración real",
+        "heading": "Lo que no ves, sale a la vista.",
+        "heading_size": "h2",
+        "text": "<p>Pasa VISTIL Fabric sobre tus textiles y comprueba lo que se va acumulando en el depósito.</p>",
+        "before_label": "Antes",
+        "after_label": "Después",
+        "slider_label": "Desliza para comparar antes y después",
+        "microclaim": "Limpieza que puedes ver.",
+        "support_text": "El depósito transparente te permite comprobar lo que retiras durante el uso.",
         "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "trust-guarantee": {
+      "type": "vistil-trust-guarantee",
+      "blocks": {
+        "item-shipping": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "title": "Envío 24/48h",
+            "text": "Preparado desde nuestro almacén en España."
+          }
+        },
+        "item-returns": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "return",
+            "title": "90 días para devoluciones",
+            "text": "Si no encaja contigo, puedes solicitar la devolución según nuestra política."
+          }
+        },
+        "item-payment": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "padlock",
+            "title": "Pago seguro",
+            "text": "Tus datos de pago se procesan mediante plataformas de pago seguras."
+          }
+        },
+        "item-support": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "chat_bubble",
+            "title": "Soporte cuando lo necesites",
+            "text": "Si tienes una duda sobre tu pedido o el producto, estamos para ayudarte."
+          }
+        }
+      },
+      "block_order": [
+        "item-shipping",
+        "item-returns",
+        "item-payment",
+        "item-support"
+      ],
+      "settings": {
+        "heading": "Compra con tranquilidad.",
+        "heading_size": "h2",
+        "subheading": "<p>Hemos pensado cada paso para que comprar VISTIL sea sencillo, claro y seguro.</p>",
+        "image_alt": "Compra con tranquilidad: 90 días para devolver tu pedido",
+        "fallback_image": "guarantee",
+        "image_2_alt": "Envío 24/48h preparado desde nuestro almacén en España",
+        "fallback_image_2": "shipping",
+        "closing_heading": "Menos dudas. Más tranquilidad.",
+        "closing_text": "<p>Desde el pedido hasta la devolución, queremos que sepas qué esperar en cada paso.</p>",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "reviews": {
+      "type": "vistil-reviews",
+      "blocks": {
+        "proof-visible": {
+          "type": "proof",
+          "settings": {
+            "title": "Resultado visible",
+            "text": "El depósito transparente permite comprobar lo que vas retirando durante la limpieza."
+          }
+        },
+        "proof-home": {
+          "type": "proof",
+          "settings": {
+            "title": "Uso real en casa",
+            "text": "Diseñado para colchones, sofás, almohadas, alfombras, peluches y otros textiles."
+          }
+        },
+        "proof-purchase": {
+          "type": "proof",
+          "settings": {
+            "title": "Compra sin complicaciones",
+            "text": "Envío 24/48h desde España y 90 días para solicitar una devolución."
+          }
+        }
+      },
+      "block_order": [
+        "proof-visible",
+        "proof-home",
+        "proof-purchase"
+      ],
+      "settings": {
+        "heading": "Lo importante se ve en el uso.",
+        "heading_size": "h2",
+        "subheading": "<p>VISTIL Fabric está pensado para ofrecer una experiencia simple, visible y fácil de comprobar desde el primer uso.</p>",
+        "closing_heading": "Prueba VISTIL Fabric en tu propia rutina.",
+        "closing_text": "<p>La mejor prueba está en lo que ves después de usarlo.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
     "unboxing": {
@@ -347,98 +491,36 @@
         "benefit-1": {
           "type": "benefit",
           "settings": {
-            "eyebrow": "Unboxing",
+            "eyebrow": "En la caja",
             "heading": "Todo lo que recibes",
-            "text": "<p>[PLACEHOLDER: describe brevemente qué llega en la caja]</p>",
-            "bullet_1": "[PLACEHOLDER: accesorio/contenido real 1]",
-            "bullet_2": "[PLACEHOLDER: accesorio/contenido real 2]",
-            "bullet_3": "[PLACEHOLDER: accesorio/contenido real 3]"
+            "bullet_1": "VISTIL Fabric",
+            "bullet_2": "[PLACEHOLDER: accesorio real confirmado]",
+            "bullet_3": "[PLACEHOLDER: accesorio real confirmado]"
           }
         }
       },
-      "block_order": ["benefit-1"],
+      "block_order": [
+        "benefit-1"
+      ],
       "settings": {
         "heading": "",
         "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     },
-    "shipping-trust": {
-      "type": "vistil-trust-guarantee",
+    "final-cta": {
+      "type": "vistil-final-cta",
       "settings": {
-        "color_scheme": "scheme-1",
-        "image_alt": "Envío 24/48h VISTIL, preparado desde nuestro almacén en España",
-        "fallback_image": "shipping",
-        "guarantee_icon": "none",
-        "guarantee_heading": "Envío 24/48h",
-        "guarantee_text": "<p>Preparado desde nuestro almacén en España.</p>",
-        "padding_top": 44,
-        "padding_bottom": 44
-      }
-    },
-    "trust-guarantee": {
-      "type": "vistil-trust-guarantee",
-      "blocks": {
-        "badge-1": {
-          "type": "badge",
-          "settings": {
-            "icon": "lock",
-            "text": "Secure checkout"
-          }
-        },
-        "badge-2": {
-          "type": "badge",
-          "settings": {
-            "icon": "truck",
-            "text": "Envío 24/48h"
-          }
-        },
-        "badge-3": {
-          "type": "badge",
-          "settings": {
-            "icon": "return",
-            "text": "Devolución en 90 días"
-          }
-        }
-      },
-      "block_order": [
-        "badge-1",
-        "badge-2",
-        "badge-3"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "image_alt": "Compra con tranquilidad — garantía de devolución VISTIL",
-        "fallback_image": "guarantee",
-        "guarantee_icon": "checkmark",
-        "guarantee_heading": "Tienes 90 días para devolver tu pedido",
-        "guarantee_text": "<p>Proceso sencillo y sin complicaciones.</p>",
-        "padding_top": 44,
-        "padding_bottom": 44
-      }
-    },
-    "reviews": {
-      "type": "vistil-reviews",
-      "blocks": {
-        "review-1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "[PLACEHOLDER: paste a real customer review]",
-            "author": "[PLACEHOLDER: customer name]",
-            "verified": false
-          }
-        }
-      },
-      "block_order": [
-        "review-1"
-      ],
-      "settings": {
-        "heading": "What customers are saying",
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 52
+        "heading": "Tu hogar puede parecer limpio. VISTIL te ayuda a ir un paso más allá.",
+        "heading_size": "h2",
+        "text": "<p>Aspiración + luz UV para el cuidado diario de colchones, sofás y otros textiles.</p>",
+        "cta_label": "Añadir al carrito",
+        "sold_out_label": "Agotado",
+        "microcopy": "Envío 24/48h desde España · 90 días para devoluciones · Pago seguro",
+        "color_scheme": "scheme-3",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "disclosures": {
@@ -451,7 +533,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "También te puede interesar",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -469,24 +551,26 @@
     "sticky-atc": {
       "type": "vistil-sticky-atc",
       "settings": {
-        "cta_label": "Add to cart",
-        "sold_out_label": "Sold out",
+        "cta_label": "Añadir al carrito",
+        "sold_out_label": "Agotado",
+        "urgency_text": "Últimas unidades",
+        "microcopy": "Envío 24/48h · 90 días para devoluciones",
+        "show_on_desktop": true,
         "color_scheme": "scheme-1"
       }
     }
   },
   "order": [
     "main",
-    "social-proof",
-    "characteristics",
     "value-proposition",
+    "characteristics",
     "offer",
     "objections",
     "transformation",
-    "unboxing",
-    "shipping-trust",
     "trust-guarantee",
     "reviews",
+    "unboxing",
+    "final-cta",
     "disclosures",
     "related-products",
     "sticky-atc"

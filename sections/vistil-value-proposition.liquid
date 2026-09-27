@@ -26,26 +26,32 @@
       <h2 class="vistil-heading vistil-center {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
     {%- endif -%}
     {%- if section.settings.subheading != blank -%}
-      <p class="vistil-subheading vistil-center">{{ section.settings.subheading }}</p>
+      <div class="vistil-subheading vistil-center rte">{{ section.settings.subheading }}</div>
     {%- endif -%}
 
     <div class="vistil-value-prop__grid vistil-grid" style="--columns-desktop: {{ section.settings.columns_desktop }};">
       {%- for block in section.blocks -%}
-        <div class="vistil-value-prop__item vistil-center{% if settings.animations_reveal_on_scroll %} animate--slide-in{% endif %}" {{ block.shopify_attributes }}>
+        <div class="vistil-value-prop__item{% if settings.animations_reveal_on_scroll %} animate--slide-in{% endif %}" {{ block.shopify_attributes }}>
           {%- if block.settings.icon != 'none' -%}
             <div class="vistil-icon vistil-value-prop__icon">
               {%- render 'icon-accordion', icon: block.settings.icon -%}
             </div>
           {%- endif -%}
-          {%- if block.settings.heading != blank -%}
-            <h3 class="h4 vistil-value-prop__item-heading">{{ block.settings.heading | escape }}</h3>
-          {%- endif -%}
-          {%- if block.settings.text != blank -%}
-            <div class="vistil-value-prop__item-text rte">{{ block.settings.text }}</div>
-          {%- endif -%}
+          <div class="vistil-value-prop__item-body">
+            {%- if block.settings.heading != blank -%}
+              <h3 class="h4 vistil-value-prop__item-heading">{{ block.settings.heading | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="vistil-value-prop__item-text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
         </div>
       {%- endfor -%}
     </div>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="vistil-value-prop__footnote vistil-center">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
   </div>
 </div>
 
@@ -58,7 +64,7 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Why VISTIL"
+      "default": "Más que cambiar las sábanas."
     },
     {
       "type": "select",
@@ -68,13 +74,19 @@
         { "value": "h1", "label": "Medium" },
         { "value": "h0", "label": "Large" }
       ],
-      "default": "h1",
+      "default": "h2",
       "label": "Heading size"
     },
     {
       "type": "richtext",
       "id": "subheading",
       "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Secondary detail",
+      "info": "Short line shown below the grid."
     },
     {
       "type": "range",
@@ -127,6 +139,11 @@
           "label": "Icon",
           "options": [
             { "value": "none", "label": "None" },
+            { "value": "suction", "label": "VISTIL: Suction" },
+            { "value": "uv_light", "label": "VISTIL: UV light" },
+            { "value": "filter_grid", "label": "VISTIL: Filter" },
+            { "value": "handheld", "label": "VISTIL: Compact device" },
+            { "value": "eye", "label": "Eye" },
             { "value": "lightning-bolt", "label": "Lightning bolt" },
             { "value": "truck", "label": "Truck" },
             { "value": "lock", "label": "Lock" },
@@ -148,13 +165,13 @@
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Value proposition"
+          "default": "Beneficio"
         },
         {
           "type": "richtext",
           "id": "text",
           "label": "Text",
-          "default": "<p>Short, benefit-driven description.</p>"
+          "default": "<p>Descripción breve del beneficio.</p>"
         }
       ]
     }
@@ -163,10 +180,10 @@
     {
       "name": "VISTIL: Value proposition",
       "blocks": [
-        { "type": "value", "settings": { "icon": "truck", "heading": "Free shipping" } },
-        { "type": "value", "settings": { "icon": "lock", "heading": "Secure checkout" } },
-        { "type": "value", "settings": { "icon": "return", "heading": "Easy returns" } },
-        { "type": "value", "settings": { "icon": "heart", "heading": "Loved by customers" } }
+        { "type": "value", "settings": { "icon": "suction" } },
+        { "type": "value", "settings": { "icon": "uv_light" } },
+        { "type": "value", "settings": { "icon": "filter_grid" } },
+        { "type": "value", "settings": { "icon": "handheld" } }
       ]
     }
   ],

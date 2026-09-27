@@ -1,0 +1,110 @@
+{% comment %}
+  Closing call to action for the product page. The button delegates to Dawn's
+  main product form (assets/vistil-product-bridge.js), keeping the selected pack.
+{% endcomment %}
+{%- if product -%}
+  {{ 'vistil-theme.css' | asset_url | stylesheet_tag }}
+  {{ 'section-vistil-final-cta.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'vistil-product-bridge.js' | asset_url }}" defer="defer"></script>
+
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+  {%- endstyle -%}
+
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div class="page-width section-{{ section.id }}-padding">
+      <div class="vistil-final-cta vistil-center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="vistil-heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="vistil-final-cta__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        <div class="vistil-final-cta__action">
+          {%- render 'vistil-atc-button',
+            product: product,
+            label: section.settings.cta_label,
+            sold_out_label: section.settings.sold_out_label,
+            button_class: 'vistil-final-cta__button',
+            watch: true
+          -%}
+        </div>
+        {%- if section.settings.microcopy != blank -%}
+          <p class="vistil-final-cta__microcopy">{{ section.settings.microcopy | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "VISTIL: Final CTA",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Tu hogar puede parecer limpio. VISTIL te ayuda a ir un paso más allá." },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Aspiración + luz UV para el cuidado diario de colchones, sofás y otros textiles.</p>" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Añadir al carrito" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Agotado" },
+    { "type": "text", "id": "microcopy", "label": "Microcopy", "info": "Real, verifiable claims only.", "default": "Envío 24/48h desde España · 90 días para devoluciones · Pago seguro" },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "VISTIL: Final CTA"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

@@ -62,3 +62,34 @@
   width: 1.2rem;
   height: 1.2rem;
 }
+
+.vistil-reviews__card--proof {
+  gap: 0.6rem;
+  background: rgba(var(--vistil-soft-grey), 0.6);
+  border-color: transparent;
+}
+
+.vistil-reviews__proof-title {
+  margin: 0;
+}
+
+.vistil-reviews__proof-text {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.vistil-reviews__closing {
+  max-width: 56rem;
+  margin: 4rem auto 0;
+}
+
+.vistil-reviews__closing-heading {
+  margin: 0 0 0.8rem;
+}
+
+.vistil-reviews__closing .rte p {
+  margin: 0;
+  color: rgba(var(--color-foreground), 0.8);
+}

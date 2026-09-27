@@ -10,6 +10,7 @@
   {% endif %}
 >
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'vistil-product-blocks.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
@@ -97,9 +98,54 @@
                   >
                     {{- block.settings.text -}}
                   </p>
+                {%- when 'vistil_urgency' -%}
+                  {%- if block.settings.text != blank -%}
+                    <p
+                      class="vistil-urgency"
+                      style="--vistil-urgency-bg: {{ block.settings.background }}; --vistil-urgency-fg: {{ block.settings.foreground }};"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.text | escape }}
+                    </p>
+                  {%- endif -%}
+                {%- when 'vistil_heading' -%}
+                  {%- if block.settings.heading != blank -%}
+                    {%- assign vistil_heading_tag = block.settings.heading_tag | default: 'h1' -%}
+                    <{{ vistil_heading_tag }}
+                      class="vistil-product-heading {{ block.settings.heading_size }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{- block.settings.heading -}}
+                    </{{ vistil_heading_tag }}>
+                  {%- endif -%}
+                {%- when 'vistil_text' -%}
+                  {%- if block.settings.text != blank -%}
+                    <p class="vistil-product-text vistil-product-text--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+                      {{- block.settings.text -}}
+                    </p>
+                  {%- endif -%}
+                {%- when 'vistil_checklist' -%}
+                  <ul class="vistil-checklist list-unstyled" role="list" {{ block.shopify_attributes }}>
+                    {%- for i in (1..6) -%}
+                      {%- assign item_key = 'item_' | append: i -%}
+                      {%- assign item_text = block.settings[item_key] -%}
+                      {%- if item_text != blank -%}
+                        <li class="vistil-checklist__item">
+                          {%- render 'icon-accordion', icon: 'checkmark' -%}
+                          <span>{{ item_text | escape }}</span>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1>{{ product.title | escape }}</h1>
+                    {%- if block.settings.heading_tag == 'h2' -%}
+                      <h2 class="vistil-product-name {{ block.settings.heading_size | default: 'h3' }}">
+                        {{- product.title | escape -}}
+                      </h2>
+                    {%- else -%}
+                      <h1>{{ product.title | escape }}</h1>
+                    {%- endif -%}
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
@@ -795,9 +841,103 @@
       ]
     },
     {
+      "type": "vistil_urgency",
+      "name": "VISTIL: Urgency bar",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "info": "Only state scarcity that is true (EU unfair commercial practices rules).", "default": "YA ES VIRAL | ÚLTIMAS UNIDADES" },
+        { "type": "color", "id": "background", "label": "Background", "default": "#31473D" },
+        { "type": "color", "id": "foreground", "label": "Text color", "default": "#F7F7F3" }
+      ]
+    },
+    {
+      "type": "vistil_heading",
+      "name": "VISTIL: Headline",
+      "settings": [
+        { "type": "inline_richtext", "id": "heading", "label": "Headline", "default": "Lo que no ves también se acumula." },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "HTML tag",
+          "info": "Use a single h1 per page. If this is the h1, set the product title block to h2.",
+          "options": [
+            { "value": "h1", "label": "h1" },
+            { "value": "h2", "label": "h2" },
+            { "value": "p", "label": "Paragraph" }
+          ],
+          "default": "h1"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Size",
+          "options": [
+            { "value": "h2", "label": "Small" },
+            { "value": "h1", "label": "Medium" }
+          ],
+          "default": "h1"
+        }
+      ]
+    },
+    {
+      "type": "vistil_text",
+      "name": "VISTIL: Text",
+      "settings": [
+        { "type": "inline_richtext", "id": "text", "label": "Text" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "eyebrow", "label": "Eyebrow" },
+            { "value": "subheadline", "label": "Subheadline" },
+            { "value": "body", "label": "Body" },
+            { "value": "small", "label": "Small / microcopy" }
+          ],
+          "default": "body"
+        }
+      ]
+    },
+    {
+      "type": "vistil_checklist",
+      "name": "VISTIL: Checklist",
+      "settings": [
+        { "type": "text", "id": "item_1", "label": "Item 1" },
+        { "type": "text", "id": "item_2", "label": "Item 2" },
+        { "type": "text", "id": "item_3", "label": "Item 3" },
+        { "type": "text", "id": "item_4", "label": "Item 4" },
+        { "type": "text", "id": "item_5", "label": "Item 5" },
+        { "type": "text", "id": "item_6", "label": "Item 6" }
+      ]
+    },
+    {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "HTML tag",
+          "info": "Keep h1 unless another block on this page is the h1.",
+          "options": [
+            { "value": "h1", "label": "h1" },
+            { "value": "h2", "label": "h2" }
+          ],
+          "default": "h1"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Size (h2 only)",
+          "options": [
+            { "value": "h4", "label": "Small" },
+            { "value": "h3", "label": "Medium" },
+            { "value": "h2", "label": "Large" }
+          ],
+          "default": "h3"
+        }
+      ]
     },
     {
       "type": "price",

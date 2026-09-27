@@ -24,6 +24,10 @@
   opacity: 0.85;
 }
 
+.vistil-subheading p {
+  margin: 0;
+}
+
 .vistil-center {
   text-align: center;
 }
@@ -71,6 +75,26 @@
 .vistil-button[aria-disabled='true'] {
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.vistil-atc {
+  display: block;
+}
+
+.vistil-button[aria-busy='true'] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.vistil-atc__error {
+  margin: 0.8rem 0 0;
+  font-size: 1.4rem;
+  line-height: 1.45;
+  color: rgb(var(--color-foreground));
+}
+
+.vistil-atc__error[hidden] {
+  display: none;
 }
 
 .vistil-strike {

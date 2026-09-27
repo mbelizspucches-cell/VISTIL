@@ -59,3 +59,15 @@
   width: 2rem;
   height: 2rem;
 }
+
+.vistil-benefits__row--no-media {
+  grid-template-columns: 1fr;
+  max-width: 64rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.vistil-benefits__row--no-media .vistil-benefits__list {
+  display: inline-flex;
+  text-align: left;
+}

@@ -3,42 +3,89 @@ if (!customElements.get('vistil-sticky-atc')) {
     'vistil-sticky-atc',
     class VistilStickyATC extends HTMLElement {
       connectedCallback() {
+        if (!window.VistilProduct) return;
+
         this.priceEl = this.querySelector('[data-vistil-sticky-price]');
+        this.titleEl = this.querySelector('[data-vistil-sticky-title]');
         this.imageEl = this.querySelector('.vistil-sticky-atc__thumb');
-        this.ctaLabelEl = this.querySelector('[data-vistil-sticky-cta-label]');
-        this.submitButton = this.querySelector('[data-vistil-sticky-submit]');
-        this.defaultLabel = this.ctaLabelEl?.textContent.trim();
-        this.soldOutLabel = this.dataset.soldOutLabel || 'Sold out';
+        this.productTitle = this.dataset.productTitle;
+        this.unitPriceHtml = this.priceEl?.innerHTML;
+        this.hasOffer = Boolean(document.querySelector('vistil-offer'));
 
-        this.mainInfo = document.querySelector('product-info[id^="MainProduct-"]');
-        this.mainSectionId = this.mainInfo?.dataset.section;
+        this.onPackChange = (event) => this.applyPack(event.detail);
+        document.addEventListener('vistil:pack-change', this.onPackChange);
+        if (VistilProduct.currentPack) this.applyPack(VistilProduct.currentPack);
 
-        this.submitButton?.addEventListener('click', this.onSubmit.bind(this));
+        this.unsubscribe = VistilProduct.subscribe('variantChange', this.onVariantChange.bind(this));
 
-        if (window.subscribe && window.PUB_SUB_EVENTS) {
-          this.unsubscribe = subscribe(PUB_SUB_EVENTS.variantChange, this.onVariantChange.bind(this));
-        }
-
-        this.observeHero();
+        this.setVisible(false);
+        this.observeCtas();
       }
 
       disconnectedCallback() {
+        document.removeEventListener('vistil:pack-change', this.onPackChange);
         this.unsubscribe?.();
         this.observer?.disconnect();
+        document.body.classList.remove('vistil-sticky-atc-active');
       }
 
-      observeHero() {
-        const target = this.mainInfo;
-        if (!target || !('IntersectionObserver' in window)) return;
+      // Visible only after the main CTA has scrolled above the viewport,
+      // and never while another VISTIL CTA is already on screen.
+      observeCtas() {
+        this.mainCta = VistilProduct.getSubmitButton();
+        if (!this.mainCta || !('IntersectionObserver' in window)) return;
 
-        this.observer = new IntersectionObserver(
-          (entries) => {
-            const heroVisible = entries[0].isIntersecting;
-            this.classList.toggle('vistil-sticky-atc--visible', !heroVisible);
-          },
-          { rootMargin: '0px 0px -70% 0px' }
-        );
-        this.observer.observe(target);
+        this.otherCtas = Array.from(document.querySelectorAll('[data-vistil-cta-watch]'));
+        this.states = new Map();
+
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => this.states.set(entry.target, entry));
+          this.update();
+        });
+        [this.mainCta, ...this.otherCtas].forEach((el) => this.observer.observe(el));
+      }
+
+      update() {
+        const main = this.states.get(this.mainCta);
+        if (!main) return;
+        const mainPassed = !main.isIntersecting && main.boundingClientRect.bottom < 0;
+        const otherVisible = this.otherCtas.some((el) => this.states.get(el)?.isIntersecting);
+        this.setVisible(mainPassed && !otherVisible);
+      }
+
+      setVisible(visible) {
+        this.classList.toggle('vistil-sticky-atc--visible', visible);
+        this.toggleAttribute('inert', !visible);
+        this.setAttribute('aria-hidden', String(!visible));
+        document.body.classList.toggle('vistil-sticky-atc-active', visible);
+        if (visible) {
+          document.documentElement.style.setProperty('--vistil-sticky-atc-height', `${this.offsetHeight}px`);
+        }
+      }
+
+      applyPack(pack) {
+        if (!pack) return;
+        const isPack = Boolean(pack.label) && pack.quantity > 1;
+        if (this.titleEl) this.titleEl.textContent = isPack ? pack.label : this.productTitle;
+        if (this.priceEl) this.priceEl.innerHTML = pack.priceHtml || this.unitPriceHtml;
+      }
+
+      onVariantChange(event) {
+        if (!VistilProduct.isMainEvent(event)) return;
+        const { variant, html } = event.data;
+        if (!variant) return;
+
+        const priceText = this.extractPriceText(html?.getElementById?.(`price-${VistilProduct.getSectionId()}`));
+        if (priceText) this.unitPriceHtml = priceText;
+        // With an offer section on the page, the offer re-announces the pack price itself.
+        if (!this.hasOffer && this.priceEl && priceText) this.priceEl.textContent = priceText;
+
+        const previewSrc = variant.featured_media?.preview_image?.src;
+        if (this.imageEl && previewSrc) {
+          const separator = previewSrc.includes('?') ? '&' : '?';
+          this.imageEl.src = `${previewSrc}${separator}width=160`;
+          this.imageEl.removeAttribute('srcset');
+        }
       }
 
       extractPriceText(scope) {
@@ -46,45 +93,7 @@ if (!customElements.get('vistil-sticky-atc')) {
         const sale = scope.querySelector('.price__sale:not(.hidden) .price-item--sale');
         if (sale) return sale.textContent.trim();
         const regular = scope.querySelector('.price__regular .price-item--regular');
-        if (regular) return regular.textContent.trim();
-        return null;
-      }
-
-      onVariantChange(event) {
-        if (event.data.sectionId !== this.mainSectionId) return;
-        const variant = event.data.variant;
-
-        if (!variant) {
-          this.setAvailability(false);
-          return;
-        }
-
-        const priceScope = event.data.html?.getElementById?.(`price-${this.mainSectionId}`);
-        const priceText = this.extractPriceText(priceScope);
-        if (priceText && this.priceEl) this.priceEl.textContent = priceText;
-
-        const previewSrc = variant.featured_media?.preview_image?.src;
-        if (this.imageEl && previewSrc) {
-          const separator = previewSrc.includes('?') ? '&' : '?';
-          this.imageEl.src = `${previewSrc}${separator}width=160`;
-        }
-
-        this.setAvailability(variant.available);
-      }
-
-      setAvailability(available) {
-        if (!this.submitButton) return;
-        this.submitButton.toggleAttribute('aria-disabled', !available);
-        if (this.ctaLabelEl) {
-          this.ctaLabelEl.textContent = available ? this.defaultLabel : this.soldOutLabel;
-        }
-      }
-
-      onSubmit(event) {
-        event.preventDefault();
-        if (this.submitButton?.getAttribute('aria-disabled') === 'true') return;
-        const realSubmitButton = this.mainInfo?.querySelector('[type="submit"]');
-        realSubmitButton?.click();
+        return regular ? regular.textContent.trim() : null;
       }
     }
   );

@@ -1,0 +1,37 @@
+{% comment %}
+  One trust photo: the Theme Editor image if set, otherwise an approved photo shipped with the theme.
+
+  Accepts:
+  - image: {Object} image_picker value
+  - alt: {String} alt text
+  - fallback: {String} 'none' | 'guarantee' | 'shipping'
+{% endcomment %}
+{%- if image != blank -%}
+  <div class="vistil-trust__media" style="--vistil-media-ratio: {{ image.aspect_ratio | default: 1 }};">
+    {{
+      image
+      | image_url: width: 1200
+      | image_tag: loading: 'lazy', alt: alt, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400, 600, 900, 1200'
+    }}
+  </div>
+{%- elsif fallback == 'guarantee' -%}
+  <div class="vistil-trust__media" style="--vistil-media-ratio: 1.5;">
+    <img
+      src="{{ 'vistil-trust-guarantee.webp' | asset_url }}"
+      alt="{{ alt | default: 'Compra con tranquilidad: 90 días para devolver tu pedido' | escape }}"
+      loading="lazy"
+      width="1536"
+      height="1024"
+    >
+  </div>
+{%- elsif fallback == 'shipping' -%}
+  <div class="vistil-trust__media" style="--vistil-media-ratio: 1;">
+    <img
+      src="{{ 'vistil-trust-shipping.webp' | asset_url }}"
+      alt="{{ alt | default: 'Envío 24/48h preparado desde nuestro almacén en España' | escape }}"
+      loading="lazy"
+      width="1254"
+      height="1254"
+    >
+  </div>
+{%- endif -%}
