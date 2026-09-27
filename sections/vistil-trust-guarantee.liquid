@@ -19,36 +19,50 @@
   <div class="page-width section-{{ section.id }}-padding">
     {%- assign badge_blocks = section.blocks | where: 'type', 'badge' -%}
 
-    {%- if badge_blocks.size > 0 -%}
-      <ul class="vistil-trust__badges list-unstyled" role="list">
-        {%- for block in badge_blocks -%}
-          <li class="vistil-trust__badge" {{ block.shopify_attributes }}>
-            {%- if block.settings.icon != 'none' -%}
-              <div class="vistil-icon">{%- render 'icon-accordion', icon: block.settings.icon -%}</div>
-            {%- endif -%}
-            <span>{{ block.settings.text | escape }}</span>
-          </li>
-        {%- endfor -%}
-      </ul>
-    {%- endif -%}
+    <div class="vistil-trust__layout{% if section.settings.image != blank %} vistil-trust__layout--with-image{% endif %}">
+      {%- if section.settings.image != blank -%}
+        <div class="vistil-trust__media">
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag: loading: 'lazy', alt: section.settings.image_alt, sizes: '(min-width: 750px) 50vw, 100vw', widths: '400, 600, 900, 1200'
+          }}
+        </div>
+      {%- endif -%}
 
-    {%- if section.settings.guarantee_heading != blank or section.settings.guarantee_text != blank -%}
-      <div class="vistil-trust__guarantee">
-        {%- if section.settings.guarantee_icon != 'none' -%}
-          <div class="vistil-icon vistil-trust__guarantee-icon">
-            {%- render 'icon-accordion', icon: section.settings.guarantee_icon -%}
+      <div class="vistil-trust__content">
+        {%- if badge_blocks.size > 0 -%}
+          <ul class="vistil-trust__badges list-unstyled" role="list">
+            {%- for block in badge_blocks -%}
+              <li class="vistil-trust__badge" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != 'none' -%}
+                  <div class="vistil-icon">{%- render 'icon-accordion', icon: block.settings.icon -%}</div>
+                {%- endif -%}
+                <span>{{ block.settings.text | escape }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.guarantee_heading != blank or section.settings.guarantee_text != blank -%}
+          <div class="vistil-trust__guarantee">
+            {%- if section.settings.guarantee_icon != 'none' -%}
+              <div class="vistil-icon vistil-trust__guarantee-icon">
+                {%- render 'icon-accordion', icon: section.settings.guarantee_icon -%}
+              </div>
+            {%- endif -%}
+            <div>
+              {%- if section.settings.guarantee_heading != blank -%}
+                <h3 class="h4">{{ section.settings.guarantee_heading | escape }}</h3>
+              {%- endif -%}
+              {%- if section.settings.guarantee_text != blank -%}
+                <div class="rte">{{ section.settings.guarantee_text }}</div>
+              {%- endif -%}
+            </div>
           </div>
         {%- endif -%}
-        <div>
-          {%- if section.settings.guarantee_heading != blank -%}
-            <h3 class="h4">{{ section.settings.guarantee_heading | escape }}</h3>
-          {%- endif -%}
-          {%- if section.settings.guarantee_text != blank -%}
-            <div class="rte">{{ section.settings.guarantee_text }}</div>
-          {%- endif -%}
-        </div>
       </div>
-    {%- endif -%}
+    </div>
   </div>
 </div>
 
@@ -63,6 +77,12 @@
       "label": "Color scheme",
       "default": "scheme-2"
     },
+    {
+      "type": "header",
+      "content": "Trust visual (optional)"
+    },
+    { "type": "image_picker", "id": "image", "label": "Trust image", "info": "Optional real photo — e.g. shipping, guarantee/return process, or packaging. Leave blank to show text only." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text" },
     {
       "type": "header",
       "content": "Guarantee callout"

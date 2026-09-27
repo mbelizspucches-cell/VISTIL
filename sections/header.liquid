@@ -205,7 +205,21 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- comment -%}
+            No logo uploaded via Theme settings > Logo yet: fall back to the
+            VISTIL wordmark shipped with the theme (assets/vistil-logo-dark.png,
+            897x342). Upload a logo in the Theme Editor to override this.
+          {%- endcomment -%}
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'vistil-logo-dark.png' | asset_url }}"
+              class="header__heading-logo motion-reduce"
+              alt="{{ shop.name }}"
+              width="{{ settings.logo_width }}"
+              height="{{ settings.logo_width | times: 342 | divided_by: 897 }}"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -248,7 +262,19 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- comment -%}
+            Fallback wordmark — see the top-center block above for details.
+          {%- endcomment -%}
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'vistil-logo-dark.png' | asset_url }}"
+              class="header__heading-logo"
+              alt="{{ shop.name }}"
+              width="{{ settings.logo_width }}"
+              height="{{ settings.logo_width | times: 342 | divided_by: 897 }}"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

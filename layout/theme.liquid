@@ -9,6 +9,10 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      {%- comment -%} Fallback favicon: the VISTIL "V" mark, shipped with the theme. Upload a favicon in Theme settings > Logo to override. {%- endcomment -%}
+      <link rel="icon" type="image/png" href="{{ 'vistil-favicon.png' | asset_url }}">
+      <link rel="apple-touch-icon" href="{{ 'vistil-favicon.png' | asset_url }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}

@@ -1,3 +1,28 @@
+.vistil-trust__layout--with-image {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 750px) {
+  .vistil-trust__layout--with-image {
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+.vistil-trust__media {
+  min-width: 0;
+}
+
+.vistil-trust__media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--media-radius, 0);
+}
+
 .vistil-trust__badges {
   display: flex;
   flex-wrap: wrap;
@@ -26,6 +51,15 @@
   border-radius: var(--text-boxes-radius, 0.8rem);
   border: 0.1rem solid rgba(var(--color-foreground), 0.15);
   text-align: left;
+}
+
+.vistil-trust__layout--with-image .vistil-trust__guarantee {
+  max-width: none;
+  margin: 0;
+}
+
+.vistil-trust__layout--with-image .vistil-trust__badges {
+  justify-content: flex-start;
 }
 
 .vistil-trust__guarantee-icon svg {
